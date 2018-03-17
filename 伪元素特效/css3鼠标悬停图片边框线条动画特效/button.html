@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* 公共样式 */
+        .btn {
+            outline: none;
+            display: inline-block;
+            line-height: 35px;
+            font-size: 15px;
+            position: relative;
+            border-radius: 3px;
+            border: 1px solid #d0d0d0;
+            background: #d0d0d0;
+            opacity: .999;
+            
+        }
+
+        body {
+            background: #000;
+        }
+        /* 公共样式 */        
+
+        /* 伪元素线条效果样式 */
+        .btn-border-o::before,.btn-border-o::after{
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            border-color: #a92a62;
+            border-style:solid;
+            border-radius: 3px;
+        }
+        .btn-border-o::before{
+            width:0;
+            height:100%;
+            border-width: 1px 0 1px 0;
+           transition:all .5s;
+            
+        }
+        .btn-border-o::after{
+            width:100%;
+            height:0;
+            border-width: 0 1px 0 1px;
+            border-color: greenyellow;
+            transition:all .5s;
+        }
+        .btn-border-o:hover::before{
+            width:100%;
+           transition:all .5s;
+        }
+        .btn-border-o:hover::after{
+            height:100%;
+            transition:all .5s;
+           /* transition-delay: 1s; */
+        }
+        .btn:hover{
+            background-color: transparent;
+            color:#fff;
+        }
+        /* 伪元素线条效果样式 */
+
+        /* ================ */
+        /* 水平打开效果 */
+        .btn-fill-horz::before,.btn-fill-horz::after{
+            content: "";
+            position: absolute;
+            width:0;
+            height: 100%;
+            top:0px;
+            background: greenyellow;
+            z-index:-1;
+            transition: all 0.3s; 
+            opacity:0;
+        }
+        .btn-fill-horz{
+            overflow: hidden;
+        }
+        .btn-fill-horz::before{
+            left:50%;
+        }
+        .btn-fill-horz::after{
+            right:50%;
+        }
+        .btn-fill-horz:hover::before,.btn-fill-horz:hover::after{
+            width:50%;
+            opacity:1;
+        }
+        /* 水平打开效果 */
+        
+    </style>
+</head>
+
+<body>
+    <!-- 伪元素线条效果 -->
+    <section>
+        <button class="btn btn-border-o">Wet Asphalt</button>
+        <button class="btn btn-fill-horz">Wet Asphalt</button>        
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>伪元素悬浮出{}号</title>
+    <style>
+        .box{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        ul{
+            list-style:none;
+        }
+        li{
+            height: 100px;
+            line-height: 100px;
+            color:#fff;
+            font-size:30px;
+            float:left;
+            width:24%;
+            background: yellowgreen;
+            text-align: center;
+        }
+        li:not(:last-child){
+            margin-right: 10px;
+        }
+        li:hover::after{
+            content: "]";
+            margin-left:10px;
+        }
+        li:hover::before{
+            content: "[";
+            margin-right:10px;
+            
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <ul>
+            <li>nav1</li>
+            <li>nav2</li>
+            <li>nav3</li>
+            <li>nav4</li>
+        </ul>
+    </div>
+</body>
+</html>
