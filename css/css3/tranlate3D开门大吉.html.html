@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.box{
+			width: 450px;
+			height: 300px;
+			border:1px solid red;
+			margin: 100px auto;
+			background: url(./images/chuqiao/1.jpg) no-repeat;
+			position: relative;
+			perspective:1000px;
+		}
+		.door-l,.door-r{
+			position: absolute;
+			width: 50%;
+			height: 100%;
+			background: url(./images/men.png);
+			/* background: pink; */
+			transition:all 2s;
+			transform-origin:left;
+		}
+		.door-r{
+			right:0;
+			border-left: 1px solid #ccc;
+			transform-origin:right;
+		}
+		.box:hover .door-l{
+			transform:rotateY(-130deg);
+		}
+		.box:hover .door-r{
+			transform:rotateY(130deg);
+		}
+		.door-l:before,.door-r:after{
+			content:"";
+			width: 20px;
+			height: 20px;
+			border:1px solid #fff;
+			display: block;
+			border-radius: 50%;
+			position: absolute;
+			top:50%;
+			transform:translateY(-50%);
+		}
+		.door-l:before{
+			right:6px;
+		}
+		.door-r:after{
+			left:5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="door-l"></div>
+		<div class="door-r"></div>
+	</div>
+</body>
+</html>

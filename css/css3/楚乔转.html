@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>楚乔传之tansform</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 200px;
+            /* border: 1px solid #000; */
+            position: relative;
+            margin:200px auto;
+
+        }
+        img{
+            width: 100%;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .box img{
+            
+            transition: all 3s;
+            transform-origin: right;
+        }
+        .box:hover img:nth-of-type(1){
+            transform: rotate(60deg);
+        }
+        .box:hover img:nth-of-type(2){
+            transform: rotate(120deg);
+        }
+        .box:hover img:nth-of-type(3){
+            transform: rotate(180deg);
+        }
+        .box:hover img:nth-of-type(4){
+            transform: rotate(260deg);
+        }
+        .box:hover img:nth-of-type(5){
+            transform: rotate(320deg);
+        }
+        .box:hover img:nth-of-type(6){
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="./images/chuqiao/1.jpg" alt="">
+        <img src="./images/chuqiao/2.jpg" alt="">
+        <img src="./images/chuqiao/3.jpg" alt="">
+        <img src="./images/chuqiao/4.jpg" alt="">
+        <img src="./images/chuqiao/5.jpg" alt="">
+        <img src="./images/chuqiao/6.jpg" alt="">
+    </div>
+</body>
+</html>
+<!-- <script>
+    let imgList = document.querySelectorAll('.box img');
+    let deg = 60;
+    for(let i = 0;i<imgList.length;i++){
+        imgList[i].style.transform = "rotate("+deg+"deg)";
+        imgList[i].style.transitoin = "3s";
+        deg += 60;
+    }
+</script> -->

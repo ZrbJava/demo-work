@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- saved from url=(0210)file:///F:/2017%E5%B9%B4%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/%E9%BB%91%E9%A9%AC/%E4%B8%8A%E8%AF%BE%E8%A7%86%E9%A2%91/css/CSS%E7%AC%AC8%E5%A4%A9/04%20-%20%E6%BA%90%E4%BB%A3%E7%A0%81/code/requestAnimateFrame.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test" style="width: 101%; height: 17px; background: rgb(0, 255, 0);">101%</div>
+    <input type="button" value="Run" id="run">
+
+
+
+<script>
+    window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame;
+    var start = null;
+    var ele = document.getElementById("test");
+    var progress = 0;
+
+    function step(timestamp) {
+        progress += 1;
+        ele.style.width = progress + "%";
+        ele.innerHTML = progress + "%";
+        if (progress < 100) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+    document.getElementById("run").addEventListener("click", function () {
+        ele.style.width = "1px";
+        progress = 0;
+        requestAnimationFrame(step);
+    }, false);
+</script></body></html>

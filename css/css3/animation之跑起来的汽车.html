@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/* 第一步：定义一个动画序列 */
+
+		/* animation:动画名称 动画时间 运动曲线  何时开始  播放次数  是否反方向; */
+		@keyframes car{
+			0%{
+				transform:translate(0);
+			}
+			50%{
+				transform:translate(1000px);
+			}
+			51%{
+				transform:translate(1000px) rotateY(180deg);
+			}
+			98%{
+				transform:translate(0) rotateY(180deg);
+			}
+			100%{
+				transform:translate(0);
+			}
+		}
+		img {
+			animation:car 5s infinite;  /* 调用定义好的动画序列 */
+		}
+	</style>
+</head>
+<body>
+	<img src="images/car.jpg"  width="200" alt="">
+</body>
+</html>

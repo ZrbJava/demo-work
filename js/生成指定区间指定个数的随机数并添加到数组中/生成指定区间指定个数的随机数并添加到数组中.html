@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>随机生成一个包含start和end的随机数  </title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+   function getOrder(start, end) {  
+               var length = end - start;  
+               var randomArr = [];  
+               var index = 0;  
+               while (index < length) {  
+                   var flag = true;  
+
+                   //随机生成一个包含start和end的随机数                    
+                   var num = parseInt(Math.random() * (length + 1)+start); 
+                   for (var i in randomArr) {  
+                       if (randomArr[i] == num) {  
+                           flag = false;  
+                       }  
+                   }  
+                   if (flag == true) {  
+                    randomArr[index] = num;  
+                       index++;  
+                   }  
+               }  
+               return randomArr;
+           }  
+           console.log(getOrder(5, 10));  
+    
+</script>

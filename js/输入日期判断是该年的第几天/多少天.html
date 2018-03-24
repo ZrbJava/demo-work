@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>多少天</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  //1.输入一个年份，判断是否是闰年(能被4整除而不能被100整除.2.能被400整除.)
+  //2.输入某年某月某日，判断这一天是这一年的第几天
+  
+  function isLeapYear(year){
+    if((year%4==0&&year%100!=0) || (year%400==0)){
+      return true;
+    }else {
+      return false;
+    }
+  }
+//  console.log(isLeapYear(2008));
+
+  function getDate(year,month,day){
+    // 2017 11 13    //就是将1到10月的每天加起来然后再加11月的13天
+    var day = day;
+    var days = [31,28,31,30,31,30,31,31,30,31,30,31]; //相当于是隐藏的已知条件
+    for(var i=0;i<month-1;i++){  // 索引是取到10
+      day += days[i];
+    }
+    if(isLeapYear(year) &&month>2){
+      day ++;
+    }
+    return day;
+  }
+  
+  console.log(getDate(2008,3,1));
+  console.log(getDate(2018,3,24));
+</script>

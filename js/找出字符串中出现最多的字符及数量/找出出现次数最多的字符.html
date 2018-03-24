@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字符串的练习二</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  var str = "abaasdffggghhjjkkgfddsssss3444343";
+  //6、找出以上字符串中出现次数最多的字符和出现的次数?
+  // js中没有集合，但是可以使用对象 来做
+  var obj = {};// 空对象 ,把出现的字符做为此对象的属性
+  // 对象是键值对的集合，有属性就会有属性值
+  // 循环遍历这个字符中，把字符串的字符做为对象 的属性，而且让此属性不能重复，如果发现后面的字符已经是对象 的属性了，让此属性值+1即可
+  // 就是将字符串中的那个字母做为这个obj对象的属性,将出现的次数做为属性值
+  for(var i=0;i<str.length;i++){
+    //str[i];// str[i]就是字符串中的每一个字符
+    var ch = str[i];
+    if(obj[ch]){
+      obj[ch]++;
+    }else {
+      obj[ch] = 1;
+    }
+  }
+//  var ch;
+//  console.log(obj[ch]);
+//  obj["a"] = 2;
+//  obj["b"] = 1;
+  console.log(obj);
+  var index = 0;
+  var res = "";
+  for(var key in obj){
+    if(index<obj[key]){
+      index = obj[key];//循环遍历，将大的值付给index，并获得器对应的key
+      res = key;
+    }
+  }
+  console.log("出现次数最多的字符是:"+res+",共出现了"+index+"次");
+</script>

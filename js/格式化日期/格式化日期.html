@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>格式化日期</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  /**
+   * 写一个函数 传一个对象进来，返回一个格式化字符串的日期   2017-11-13 10:18:22
+   *
+   * 形参就相当于是变量，就是用来存储数据的
+   */
+  function getDateString(date) {
+    if(!(date instanceof Date)){
+      alert('你传进来的不是一个日期对象,程序终止...');
+      return;
+      //1. 如果函数内部有数据值要返回的话，得使用关键字return，return后面的代码 不会执行
+      //2. 如果函数内部没有数据要返回，但是也使用了return关键字,表示退出当前函数，return后面的代码不会执行
+      // 3. 无论函数内部有无数据返回，只要执行了return关键字，就会立即退出当前函数，return后面的代码不会再执行
+    }
+    var year = date.getFullYear();  // 四位数的阿拉伯数字
+    var month = date.getMonth();
+    var day = date.getDate(); // 几号    getDay()   礼拜几
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+    
+    month = month < 10 ? "0" + month : month;
+    day = day < 10 ? "0" + day : day;
+    hour = hour < 10 ? "0" + hour : hour;
+    min = min < 10 ? "0" + min : min;
+    sec = sec < 10 ? "0" + sec : sec;
+
+    return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+  }
+  var date = new Date();
+  document.write(getDateString(date));
+</script>
