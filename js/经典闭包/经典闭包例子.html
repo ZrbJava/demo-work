@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档标题</title>
+    <script>
+
+        /**
+         *      闭包是指：有权访问里另一个函数作用域中的变量的函数。
+         *          1.外函数会有返回值
+         *          2.内函数使用到外函数作用域下的变量
+         *
+         *      垃圾回收机制：
+         *          变量如果在后续的代码中都没有使用的话，那就会被垃圾回收机制回收。
+         *          而闭包特点是后续代码中有使用到前面定义的变量，所以变量不会被回收。
+         *
+         *      闭包特点：
+         *          闭包的变量一直存在内存中。
+         *              优点：由于被函数封闭了起来，更安全.
+         *              缺点：不合理利用闭包，内存浪费.
+         * */
+
+//        function fn1 () {
+//            var count = 0;
+//            return function () {
+//                count++;
+//                console.log(count);
+//            }
+//        }
+        function fn1 () {
+            var count = 0;      // 局部变量，属于fn1的
+            /* fn2是fn1里面嵌套的函数而已 */
+            function fn2() {
+                count++;
+                // 因为fn2是属于fn1里面的嵌套的函数
+                // 所以fn2的count拿的fn1里定义的变量
+                console.log(count);
+            }
+            return fn2;
+        }
+
+        var fns = fn1();    // fns存放就是fn2这个函数
+        fns();              // 执行fn2的代码
+        fns();              // 执行fn2的代码
+        fns();              // 执行fn2的代码
+
+
+        /* 这里出现的现象：函数内定义的局部变量不会消失（闭包） */
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

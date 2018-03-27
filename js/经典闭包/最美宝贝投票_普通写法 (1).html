@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .list {
+            list-style: none;
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .list li {
+            float: left;
+            width: 300px;
+            text-align: center;
+        }
+        .list input{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #f60;
+            border:0 none;
+            font-weight: bold;
+            color:#fff;
+        }
+        
+    </style>
+</head>
+<body>
+<ul class="list" id="list">
+    <li>
+        <div class="item-img"><img src="img/01.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+    <li>
+        <div class="item-img"><img src="img/02.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+    <li>
+        <div class="item-img"><img src="img/03.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+</ul>
+</body>
+</html>
+<script>
+
+    /* 获取元素 */
+    var list = document.getElementById('list');
+    var btns = list.getElementsByTagName('input');
+//    console.log(btns);
+    /* 循环注册事件 */
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].count = 0;          // 给每一个按钮对象添加count属性记录当前的票数
+        btns[i].onclick = function () {
+            /* 需求：点击当前按钮，当前按钮的票数增加1 */
+            // 分析：我们应该需要一个关联的变量与当前按钮的票数关联起来
+            this.count++;
+            console.dir(this);
+            this.value = "投票("+ this.count +")";
+//            alert( this.count );
+        }
+    }
+
+
+</script>

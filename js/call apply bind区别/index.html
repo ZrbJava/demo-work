@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        /**
+         *      this 指向 调用改函数 的 那个对象
+         *
+         *       call 的两个功能  (常用) ***
+         *          功能：
+         *              1. 调用函数
+         *              2. 改变this的指向 (调用函数的那个对象)
+         *          语法：
+         *              函数名称.call( 对象 , 参数1 , 参数2... );
+         *
+         *        apply  (特殊场景下使用)
+         *          功能：
+         *              apply 功能和 call 一样，语法上有差别而已
+         *          语法：
+         *              函数名称.apply( 对象 , [参数1 , 参数2...] );
+         *
+         *         bind
+         *             功能：
+         *                 1.改变this的指向 (调用函数的那个对象)，但是不会执行
+         *             语法：
+         *                 函数名称.bind( 对象 , 参数1 , 参数2... );
+         *
+         *
+         *          区别：
+         *              call 和 apply
+         *                  参数的区别：
+         *                      call 直接传参
+         *                      apply 参数要作为数组传进去
+         *              call 和 bind
+         *                  调用(执行)的区别
+         *                      call  直接调用
+         *                      bind  需要其他方式调用(定时器)
+         *              共同点：都能改变this的指向
+         *
+         *
+         *
+         * */
+        /* 定义函数 */
+        function sum(a,b) {
+            alert(a + b);
+            console.log(this);
+        }
+
+        sum.call(null, "A ","call方式调用函数");
+
+        sum.apply(null, ["B ","apply方式调用函数"]);
+
+        sum.bind(null, "C ", "bind方式调用函数")();
+
+
+        // apply应用场景
+        var numArr = [1,2,520,11,1111,999,1212,12];
+
+        console.log( Math );
+
+        console.log( Math.max(1, 2, 520, 11, 1111, 999, 1212, 12) );
+
+        console.log( Math.max.apply(null, numArr) );
+
+    </script>
+</head>
+<body>
+    call
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

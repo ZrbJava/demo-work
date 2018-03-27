@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .list {
+            list-style: none;
+            width: 900px;
+            margin: 0 auto;
+        }
+
+        .list li {
+            float: left;
+            width: 300px;
+            text-align: center;
+        }
+        .list input{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            background-color: #f60;
+            border:0 none;
+            font-weight: bold;
+            color:#fff;
+        }
+        
+    </style>
+</head>
+<body>
+<ul class="list" id="list">
+    <li>
+        <div class="item-img"><img src="img/01.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+    <li>
+        <div class="item-img"><img src="img/02.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+    <li>
+        <div class="item-img"><img src="img/03.jpg" alt=""/></div>
+        <input type="button" value="投票(0)"/>
+    </li>
+</ul>
+</body>
+</html>
+<script>
+
+    /*
+     *      闭包是指：有权访问里另一个函数作用域中的变量的函数。
+     *          1.外函数会有返回值
+     *          2.内函数使用到外函数作用域下的变量
+     **/
+
+    /* 定义一个闭包函数 */
+    function addCount(){
+        var count = 0;
+        return function () {
+            // 如果有定时器约束我们，类似60s倒计时获取验证码
+            /* 闭包函数内变量需要增加，所以函数体外的count不会被删除 */
+            ++count;
+            /* this在函数被调用的时候才能确定 */
+            this.value = "投票("+ count +")";
+        }
+    }
+
+    /* 获取元素 */
+    var list = document.getElementById('list');
+    var btns = list.getElementsByTagName('input');
+//    console.log(btns);
+    /* 循环注册事件 */
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].onclick = addCount();   // 点击的时候调用函数
+    }
+
+</script>

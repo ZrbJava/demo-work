@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文档标题</title>
+    <script>
+        /**
+         *      函数递归：
+         *          函数内部又调用了自己
+         *
+         *      阶乘
+                    5！ = 5 * 4 * 3 * 2 * 1      = 120
+                    4！ = 4 * 3 * 2 * 1          = 24
+                    3！ = 3 * 2 * 1              = 6
+                    2！ = 2 * 1                  = 2
+                    1！ = 1                      = 1
+
+                    n! = n*(n-1)!
+
+         * */
+        function factorial (num) {
+            if (num <= 1) {
+                return 1;                            // 结束
+            } else {
+                return num * factorial(num - 1);      // 递归点
+            }
+        }
+
+
+        factorial(4);
+        //        var i = 0;
+//        function fn() {
+//            console.log("从前有座山,山里有座庙...");
+//            i++;
+//            if( i > 3 ){
+//                return;
+//            }
+//            fn();
+//        }
+//        fn();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

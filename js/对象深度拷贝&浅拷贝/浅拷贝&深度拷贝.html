@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+    var person = {
+        name : "老王",
+        age : 30,
+        son : {
+            name : "大头儿子",
+            age : 10
+        }
+    };
+    /* 浅拷贝: 把 person 对象成员拷贝到 obj 里 */
+    var obj = {};
+    for(var key in person){
+       obj[key] = person[key];
+    }
+
+    /* 修改的拷贝出来的对象的儿子的名字 */
+    obj.son.name = "老王儿子";
+    console.log("obj.son",obj.son);
+    console.log("person",person);
+    console.log("obj",obj);
+
+
+//    function deepCopy(obj){
+//        var other = {};
+//        for(var key in obj){
+//            if( typeof obj[key] === "object" ){
+//                other[key] = deepCopy(obj[key]);
+//            }else{
+//                other[key] = obj[key];
+//            }
+//        }
+//        return other;
+//    }
+//    deepCopy();
+
+
+
+
+    </script>
+</head>
+<body>
+    
+
+
+    
+</body>
+</html>
