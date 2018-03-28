@@ -1,0 +1,160 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin:0;padding:0;
+        }
+        ul{list-style: none;}
+        .top,.dian,.jia,.fu,.mei,.bottom{
+            width: 1210px;
+            margin: 0 auto;
+        }
+        .subnav
+        {
+            position: fixed;
+            width: 38px;
+            height: 200px;
+            top:200px;
+            left:50%;
+            margin-left:605px;
+            display: none;
+        }
+        .subnav li,.back{
+            height: 36px;
+            border:1px solid #DEDEDE;
+            margin-bottom: 5px;
+            font-size:0;
+            background: url(images/bg.png) no-repeat;
+        }
+        .subnav li:hover,.subnav li.current,.back
+        {
+            border:1px solid #ED5759;
+            background: #FDEEEE;   /* 只有冲突的时候才会出现层叠 */
+            /* 背景颜色 背景图片 背景位置 背景平铺  背景固定 */
+            /* css 层叠样式表 */
+            font-size:12px;
+            color: #ED5759;
+            padding-left: 6px;
+            padding-top: 2px;
+            height: 34px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="top">
+    <img src="images/top1.png" alt="" />
+</div>
+<div class="jd dian">
+    <img src="images/dian.png" alt="" />
+</div>
+<div class="jd jia">
+    <img src="images/jia.png" alt="" />
+</div>
+<div class="jd fu">
+    <img src="images/fu.png" alt="" />
+</div>
+<div class="jd mei">
+    <img src="images/mei.png" alt="" />
+</div>
+<div class="bottom">
+    <img src="images/bottom.png" alt="" />
+</div>
+<div class="subnav">
+    <ul>
+        <li>电脑数码</li>
+        <li>家电通讯</li>
+        <li>服饰精品</li>
+        <li>美容珠宝</li>
+    </ul>
+    <div class="back">返回</div>
+
+</div>
+<script src="jq/jquery-1.12.2.js"></script>
+<script>
+
+    /**
+     *  1  只要页面往下滚动一点，电梯导航显示，否则隐藏
+     *      在滚动的时候害的判断距离，设置电梯导航编导对应的内容
+     *  2 设置图标要对应
+     *  3  点击电梯导航，页面就立刻滚动到对应的内容区域
+     *  4  返回顶部
+     */
+
+    $(function(){
+        //设置图标要对应，该图标是一张精灵图 每个图标之间的间隔就是 -55px
+        var lis = $(".subnav li");
+        for(var i = 0; i < lis.length ; i++){
+            //修改每个li的background-position-y属性
+            lis.eq(i).css("background-position-y",i * -55);
+        }
+
+        //获取到楼层
+        var jds = $(".jd");
+
+        //点击电梯导航，让页面滚动到对应的位置
+        lis.click(function(){
+            //因为电梯导航跟对应的内容是索引对应，先得到索引
+            var index = $(this).index();
+            //求出对应索引的内容的距离页面顶部的距离
+            var top = jds.eq(index).offset().top;
+            //设置页面滚动到对应的内容的顶部即可
+//            $(window).scrollTop(top);
+            $("html,body").animate({
+                scrollTop: top
+            },800)
+        });
+
+        //页面滚动事件
+        $(window).scroll(function(){
+            //暂定只要滚动的距离大于0就显示
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop > 0){
+                $(".subnav").show();
+            }else{
+                $(".subnav").hide();
+            }
+
+
+            //统一在最前面把样式清除
+            $("li.current").removeClass("current");
+
+            //判断滚动的距离，然后设置对应的电梯导航的内容变成文字
+            //建议从后面开始判断，这样代码可以少些一点
+            //超过珠宝美容的部分
+            if(scrollTop > $(".mei").offset().top - 10){
+                lis.eq(3).addClass("current");
+            }else
+            //判断超过 服饰鞋包的部分
+            if (scrollTop > $(".fu").offset().top - 10){
+                lis.eq(2).addClass("current");
+            }else
+            //判断超过 家电通讯部分
+            if (scrollTop > $(".jia").offset().top - 10){
+                lis.eq(1).addClass("current");
+            }else {
+                lis.eq(0).addClass("current");
+            }
+        });
+    });
+
+
+    /**
+     *  jq的animate函数,除了可以让css属性进行动画之外
+     *
+     *      jq还封装了一个让页面滚动的属性
+     *      scrollTop
+     *
+     */
+    //为什么要html和body一起写，是为了兼容
+//    $("html,body").animate({
+//        scrollTop: 900
+//    },1500)
+
+</script>
+</body>
+</html>

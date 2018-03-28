@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        #test1 {
+            width: 100px;
+            height: 35px;
+            background-color: #0a0;
+        }
+
+    </style>
+</head>
+<body>
+<div id="test1"></div>
+<script src="../jq/jquery-1.12.2.js"></script>
+<script src="layer.js"></script>
+<script>
+    //实验一下layer.js的简单功能
+//    $('#test1').on('click', function(){
+//        layer.msg('hello');
+//    });
+//
+//    //弹出页面层
+//    $('#test2').on('click', function(){
+//        layer.open({
+//            type: 1,
+//            area: ['600px', '360px'],
+//            shadeClose: true, //点击遮罩关闭
+//            content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+//        });
+//    });
+
+//    document.getElementById("test1").onclick = function(){
+//        layer.msg("你好");
+//    }
+
+
+    $("#test1").on("click",function(){
+        //初体验
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 0});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 1});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 2});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 3});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 4});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 5});
+//        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 6});
+        layer.alert('今天星期六，但是还是要上班，好痛苦',{icon: 6},function(index){
+            console.log("李狗蛋，上班了");
+
+            //手动把弹窗关闭
+            layer.close(index);
+        });
+    });
+
+
+</script>
+</body>
+</html>

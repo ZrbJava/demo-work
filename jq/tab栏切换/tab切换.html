@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .wrapper {
+            width: 1000px;
+            height: 475px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+
+        .tab {
+            border: 1px solid #ddd;
+            border-bottom: 0;
+            height: 36px;
+            width: 320px;
+        }
+
+        .tab li {
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            cursor: pointer;
+            border-top: 4px solid #fff;
+        }
+
+        .tab span {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            background: #ddd;
+            width: 1px;
+            height: 14px;
+            overflow: hidden;
+        }
+
+        .products {
+            width: 1002px;
+            border: 1px solid #ddd;
+            height: 476px;
+        }
+
+        .products .main {
+            float: left;
+            display: none;
+        }
+
+        .products .main.selected {
+            display: block;
+        }
+
+        .tab li.active {
+            border-color: red;
+            border-bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <ul class="tab">
+        <li class="tab-item active">国际大牌<span>◆</span></li>
+        <li class="tab-item">国妆名牌<span>◆</span></li>
+        <li class="tab-item">清洁用品<span>◆</span></li>
+        <li class="tab-item">男士精品</li>
+    </ul>
+    <div class="products">
+        <div class="main selected">
+            <a href="###"><img src="images/guojidapai.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/guozhuangmingpin.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/qingjieyongpin.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/nanshijingpin.jpg" alt=""/></a>
+        </div>
+    </div>
+</div>
+<script src="jq/jquery-1.12.2.js"></script>
+<script>
+    /**
+     *  需求：
+     *      鼠标移动到分类上面，切换对应的商品
+     *          索引对应
+     *
+     */
+    
+//     $(function(){
+//     	//找到所有的分类
+//         $(".tab-item").mouseover(function(){
+//             //先把原来的隐藏
+//             $(".selected").removeClass("selected");
+//             //获取索引
+//             var  index = $(this).index();
+//             //根据索引找到对应的图片，显示 -- 通过修改class来控制显示和隐藏
+//             $(".main").eq(index).addClass("selected");
+//             //把其余的图片隐藏
+// //            $(".main").eq(index).siblings().removeClass("selected");
+//             //修改tab栏的样式
+//             $(".active").removeClass("active");
+//             //把自己变成特殊
+//             $(this).addClass("activex");
+
+//         })
+//     });
+
+
+// 简洁版本
+        $(function(){
+            $(".tab-item").mouseover(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                $("div.main").eq($(this).index()).addClass("selected").siblings().removeClass("selected");
+            });
+            
+        });
+</script>
+</body>
+</html>

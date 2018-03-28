@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="开始" id="btn"/>
+<div id="box"></div>
+<script src="jq/jquery-1.12.2.js"></script>
+<script>
+
+    /**
+     *  让一个盒子先变大，再变小在变大在变小
+     *
+     */
+
+    $(function(){
+        $("#btn").on("click",function(){
+//            $("#box").animate({
+//                width: 500,
+//                height: 500
+//            },500,function(){
+//                $("#box").animate()
+//            })
+
+            $("#box").animate({width:500,height:500},500).animate({width:100,height:100},500).animate({width:500,height:500},500).animate({width:100,height:100},500);
+        });
+    })
+
+    /**
+     *
+     * 链式编程的原理
+     *
+     *      当一个方法执行完毕之后，，什么情况下，可以继续用.号来调用方法
+     *
+     *          只有对象可以调用方法
+     *          只要保证方法调用结束之后，结果还是一个对象，就可以继续调用方法
+     *
+     *       链式编程的关键点：
+     *          只要方法返回值是对象，就可以继续点方法调用
+     *
+     *    什么时候可以进行链式编程：
+     *      在jq里面，一般的设置操作，都可以链式
+     *      一般获取操作可能无法链式
+     *
+     *          css("height")
+     *
+     *          css("height",200).css();
+     *
+     *          $(this).siblings()
+     */
+
+//    function fn(){
+//
+//
+//    }
+//
+//    fn();
+
+//    window.fn = function(){}
+//
+//    window.fn();
+
+    //，模拟链式编程
+    var obj = {
+        say: function(){
+            console.log("hello word");
+
+            return this;
+        },
+        sing: function(){
+            console.log("左手右手一个慢动作");
+
+            return this;
+        }
+    };
+
+    obj.say().sing().say().sing();
+</script>
+</body>
+</html>

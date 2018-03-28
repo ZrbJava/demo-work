@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        #box {
+            width: 400px;
+            height: 260px;
+            border: 1px solid #000;
+        }
+
+        .small {
+            width: 100%;
+        }
+        .father {
+            width: 600px;
+            height: 500px;
+            border: 1px solid #000;
+            position: absolute;
+            top: 0;
+            left: 500px;
+
+        }
+    </style>
+</head>
+<body>
+<script src="./jq/jquery-1.12.2.js"></script>
+<script src="jquery.zoom.js"></script>
+<div id="box">
+    <img src="1.jpg" alt="" class="small"/>
+</div>
+<div class="father"></div>
+<script>
+// 官网 http://www.jacklmoore.com/zoom/
+    
+$(function(){
+        //也是入口函数
+//        $(document).ready(function(){
+//            $('.small').zoom({url: '1.jpg'});
+            $('#box').zoom({
+                url: '1.jpg',
+                on : "mouseover",
+                duration: 1000,
+                target: ".father",
+                magnify: 1,
+                onZoomIn:function(){
+                    console.log(1);
+                }
+            });
+//        });
+    });
+
+</script>
+</body>
+</html>

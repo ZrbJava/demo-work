@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+        
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script src="jq/jquery-1.12.2.js"></script>
+<script>
+
+    /**
+     *  js中，方法分为两大类
+     *
+     *      静态方法
+     *          不需要使用new的对象来调用，而是直接使用构造函数调用
+     *
+     *          $.ajax();
+     *
+     *      实例方法
+     *          必须由实例对象来调用
+     *
+     *          jq对象.css();
+     *
+     *  拓展方法的步骤
+     *      1  先写一个自调用函数
+     *
+     *      ;(function($){
+     *
+     *          写拓展的过程
+     *
+     *          2  如果要拓展静态方法
+     *              $.函数名 = fun（）{}
+     *          2  如果要拓展动态方法
+     *              $.fn.函数名 = fun(){}
+     *
+     *      })(jQuery);
+     *
+     *
+     *  2  拓展的方法：
+     *      2.1 拓展静态方法
+     *          //一般是只拓展一个用这个方法
+     *          $.函数名=function(){}
+     *          //一次性拓展多个，推荐这个
+     *          $.extend({
+     *              函数名: function(){},
+     *              函数名: function(){},
+     *              函数名: function(){}
+     *          });
+     *
+     *      2.2 拓展实例方法
+     *
+     *          $.fn.函数名  =  function(){}
+     *
+     *          $.fn.extend({
+     *              函数名: function(){},
+     *              函数名: function(){},
+     *              函数名: function(){}
+     *          });
+     */
+
+    /**
+     * 静态方法的拓展
+     *
+     *  静态方法：
+     *      公用工具 -- 求n-m之间的随机整数的函数
+     *          $.方法名();
+     *
+     *      $.random(n,m);
+     *
+     */
+
+    //第一步：先写一个自调用函数
+    ;(function($){
+        //按照拓展静态方法的方式进行拓展
+        $.random = function(n,m){
+            return  Math.floor(Math.random() * (m-n) + n);
+        }
+    })(jQuery);
+
+    /**
+     * 拓展实例方法
+     *
+     *  拓展一个操作元素的背景颜色的方法
+     *      $().backgroundColor();
+     *          如果传参，就是设置
+     *          如果不传惨，就是获取
+     *
+     */
+
+    //沙箱： 沙盘 + 箱子
+    ;(function($){
+        //沙箱的作用就是把这里面的代码充分保护起来，不被外界的任何代码所影响
+
+
+        //按照拓展实例方法的方式写代码
+        $.fn.backgroundColor = function(color){
+            //如果传入了color就是设置
+            if(color){
+                //本来应该先判断是不是颜色先，比较复杂，暂且不理会
+                this.css("backgroundColor",color);
+                //链式编程
+                return this;
+            }
+            //否则就是获取
+            else{
+                return this.css("backgroundColor");
+            }
+        }
+
+    })(jQuery);
+
+
+
+</script>
+<script>
+    //写调用插件的js
+    $(function(){
+        var number = $.random(10,20);
+        console.log(number);
+    });
+
+    //调用拓展的实例方法的代码
+    $(function(){
+        //获取一个元素，使用拓展的backgroundColor方法
+        console.log($("#box").backgroundColor());
+
+        //设置背景颜色
+        setTimeout(function(){
+            $("#box").backgroundColor("red");
+        },1000);
+    });
+
+</script>
+</body>
+</html>
