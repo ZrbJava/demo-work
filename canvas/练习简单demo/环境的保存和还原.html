@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button class="run">运行</button>
+    <button class="save">保存</button>
+    <button class="restore">还原</button>
+    <button class="up">上</button>
+    <button class="down">下</button>
+    <button class="left">左</button>
+    <button class="right">右</button>
+    <button class="clear">擦除</button>
+    <button class="reset">重置</button>
+  </div>
+  <canvas width="600" height="600"></canvas>
+  <script>
+    var cas = document.querySelector("canvas");
+    var ctx = cas.getContext("2d");
+    var textarea = document.querySelector("textarea");
+    var run = document.querySelector(".run");
+    var save = document.querySelector(".save");
+    var restore = document.querySelector(".restore");
+    var up = document.querySelector(".up");
+    var down = document.querySelector(".down");
+    var left = document.querySelector(".left");
+    var right = document.querySelector(".right");
+    var clear = document.querySelector(".clear");
+    var reset = document.querySelector(".reset");
+
+
+    run.onclick = function () {
+      var code = textarea.value;
+      // alert(code);
+      // 把字符串变成代码执行
+      //  eval 只允许在自己练习的时候使用 不要在开发的时候出现这个代码!!!!
+      eval(code);
+    }
+
+    save.onclick = function () {
+      //保存
+      ctx.save();
+    }
+    restore.onclick = function () {
+      // 还原
+      ctx.restore();
+    }
+    up.onclick = function () {
+      ctx.translate(0, -10);
+    }
+    down.onclick = function () {
+      ctx.translate(0, 10);
+    }
+    left.onclick = function () {
+      ctx.translate(-10, 0);
+    }
+    right.onclick = function () {
+      ctx.translate(10, 0);
+    }
+    clear.onclick = function () {
+      // 擦除 要注意坐标系可能会改变
+      // 不能把坐标 还原回去 最开始的位置
+      // 不能把线条属性 还原回去 最开始的位置
+      ctx.clearRect(-1000, -1000, 10000, 10000);
+    }
+
+    reset.onclick = function () {
+      // 可以重置坐标系
+      // 可以重置线条属性
+      // 就好像 重新创建了一次canvas标签一样 !!
+      cas.width = cas.width;
+    }
+
+    setInterval(function () {
+      ctx.strokeRect(50, 50, 100, 100);
+    }, 100);
+
+  </script>
+</body>
+
+</html>

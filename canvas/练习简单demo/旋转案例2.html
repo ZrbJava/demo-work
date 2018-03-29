@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    canvas{
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="600"  ></canvas>
+</body>
+<script>
+  var cas=document.querySelector("canvas");
+  var ctx=cas.getContext("2d");
+  
+  // 将坐标系移动到 cavnas标签的中心点
+  ctx.translate(300,300);
+ 
+ // 矩形的宽度和高度
+ var widthandHeight=1;
+ setInterval(function(){
+   ctx.rotate(degToArc(10));
+   widthandHeight+=0.1;
+   // 0-255 随机颜色
+  //  var random=Math.round(Math.random()*255);
+   ctx.strokeStyle="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+   ctx.strokeRect(0,0,widthandHeight,widthandHeight);
+ },10);
+
+ function degToArc(num){
+    return Math.PI/180*num;
+  }
+</script>
+</html>

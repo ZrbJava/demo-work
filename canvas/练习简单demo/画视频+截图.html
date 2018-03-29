@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    canvas{
+      border: 1px solid #000;
+    }
+    video{
+      /* opacity: 0; */
+    }
+  </style>
+</head>
+<body>
+  <button>截图</button>
+  <canvas width="600" height="600"  ></canvas>
+  <video src="./videos/蜡笔小新.mp4"  autoplay muted  ></video>
+</body>
+<script>
+  var cas=document.querySelector("canvas");
+  var btn=document.querySelector("button");
+  var video=document.querySelector("video");
+  var ctx=cas.getContext("2d");
+  
+  btn.onclick=function(){
+    ctx.drawImage(video,0,0,cas.width,cas.height);
+
+    var src=cas.toDataURL();
+
+    var aDom=document.createElement("a");
+    aDom.href=src;
+    aDom.download="葫芦";
+
+    // 报错 以静态文件的方式打开 容易报错
+    //Uncaught DOMException: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported.
+    // 把视频 的截图下载 ->  
+    // 1  以服务器的形式打开  
+    // 2 可能牵扯到跨域的问题    ajax ()
+
+
+    aDom.click();
+  }
+ 
+//  setInterval(function(){
+//   ctx.drawImage(video,0,0,cas.width,cas.height);
+//  },10);
+</script>
+</html>

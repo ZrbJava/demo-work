@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="600"></canvas>
+  <button>出来吧</button>
+  <script>
+    var cas = document.querySelector("canvas");
+    var btn = document.querySelector('button');
+    var ctx = cas.getContext("2d");
+    /* 
+    1 在线画图功能 (存放坐标点)
+    2 点击按钮 重新画画  (重新坐标点!! )
+    3 背景乱闪!
+     */
+
+    var isDraw = false;
+
+    // 坐标点
+    var arr = [];
+    cas.onmousedown = function () {
+      isDraw = true;
+      ctx.beginPath();
+
+      // 存放一个重新开启路径的标志
+      arr.push(0);
+    }
+
+    cas.onmousemove = function (e) {
+      if (!isDraw) {
+        return;
+      }
+
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+
+      arr.push({ x: e.offsetX, y: e.offsetY });
+    }
+
+    cas.onmouseup = function () {
+      isDraw = false;
+    }
+
+    cas.onmouseleave = function () {
+      isDraw = false;
+    }
+    btn.onclick = function () {
+      /* 
+      1 清空画布
+      2 重现画画
+          获取坐标点 
+       */
+
+      ctx.clearRect(0, 0, cas.width, cas.height);
+      // 开启定时器
+
+      var timeId = setInterval(function () {
+        // 获取索引最小点 
+        // 获取最先添加到数组里面的值 
+        // shift 返回索引为0的值 改变源数组的长度 
+        var point = arr.shift();
+
+        // 判断 是否需要重新开启路径
+        if (point == 0) {
+          // 开启路径
+          ctx.beginPath();
+        } else {
+          ctx.lineTo(point.x, point.y);
+          ctx.stroke();
+        }
+
+        // 判断还没有点需要画
+        if (arr.length < 1) {
+          clearInterval(timeId);
+        }
+        // 背景闪烁
+        // 数字随机 -> 背景 rgb(0-255)
+        // 获取0-255 随机数
+
+        // var random=Math.round(Math.random()*255);
+
+        document.body.style.backgroundColor="rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+      }, 10);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 600px;
+      height: 600px;
+      float: left;
+      border: 1px solid #000;
+      text-align: left;
+    }
+    body {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 工具栏 -->
+  <div>
+    <input type="color" id="colorInp">
+    <input id="numberInp" type="number" min=1>
+    <button id="lineBtn">画线条</button>
+    <button id="rectBtn">画矩形</button>
+    <button id="eraserBtn">橡皮擦</button>
+    <button id="resetBtn">重置</button>
+  </div>
+  <canvas width="600" height="600"></canvas>
+
+  <script>
+    // 获取一大堆dom元素
+    var cas = document.querySelector("canvas");
+    var ctx = cas.getContext("2d");
+    // 颜色标签
+    var colorInp = document.querySelector("#colorInp");
+    // 数字标签
+    var numberInp = document.querySelector("#numberInp");
+    // 画线条按钮
+    var lineBtn = document.querySelector("#lineBtn");
+    // 画矩形按钮
+    var rectBtn = document.querySelector("#rectBtn");
+    // 画橡皮擦按钮
+    var eraserBtn = document.querySelector("#eraserBtn");
+    // 重置按钮
+    var resetBtn = document.querySelector("#resetBtn");
+    /* 
+    画线条
+    a down move up out 
+    b down 打开开关 重新开始路径
+    c move 计算坐标  lineTo..
+    d up out 关闭开关
+     */
+    // 全局的画画参数对象
+    var DrawObj = {
+      // 开关
+      isDraw: false,
+      // 画什么类型的图案
+      what: "line",
+      // 开始按下 x坐标
+      sX:0,
+      sY:0
+    };
+
+    // 鼠标按下
+    cas.onmousedown = function (e) {
+      DrawObj.isDraw = true;
+      ctx.beginPath();
+      // 改变线条属性
+      ctx.strokeStyle = colorInp.value;
+      ctx.lineWidth = numberInp.value;
+      DrawObj.sX=e.offsetX;
+      DrawObj.sY=e.offsetY;
+    }
+    // 鼠标移动
+    cas.onmousemove = function (e) {
+      // 判断开关
+      if (!DrawObj.isDraw) {
+        return;
+      }
+      // 判断当前画图案的类型
+      if (DrawObj.what == "line") {
+        // 获取到move中的坐标
+        var moveX = e.offsetX;
+        var moveY = e.offsetY;
+        // 定点
+        ctx.lineTo(moveX, moveY);
+        // 描边
+        ctx.stroke();
+      }else if(DrawObj.what=="eraser"){
+        // 获取鼠标的坐标
+        var moveX=e.offsetX;
+        var moveY=e.offsetY;
+        // 自定义宽度和高度
+        var width=50;
+        var height=50;
+        // 开始擦除
+        ctx.clearRect(moveX,moveY,width,height);
+      }
+
+    }
+    // 鼠标抬起
+    cas.onmouseup = function (e) {
+      DrawObj.isDraw = false;
+      // 判断画的图案的类型
+      if(DrawObj.what=="rect"){
+        // 获取鼠标抬起的坐标
+        var eX=e.offsetX;
+        var eY=e.offsetY;
+        // 计算宽度和高度
+        var width=eX-DrawObj.sX;
+        var height=eY-DrawObj.sY;
+        // 画矩形
+        ctx.strokeRect(DrawObj.sX,DrawObj.sY,width,height);
+      }
+    }
+    // 鼠标移出
+    cas.onmouseout = function (e) {
+      DrawObj.isDraw = false;
+
+    }
+    // 点击画线条
+    lineBtn.onclick = function () {
+      DrawObj.what = "line";
+    }
+    // 点击画矩形
+    rectBtn.onclick = function () {
+      DrawObj.what = "rect";
+    }
+    // 点击橡皮擦
+    eraserBtn.onclick = function () {
+      DrawObj.what = "eraser";
+    }
+
+    // 点击重置
+    resetBtn.onclick=function(){
+      ctx.clearRect(0,0,cas.width,cas.height);
+    }
+  </script>
+</body>
+
+</html>

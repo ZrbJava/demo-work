@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    .box {
+      width: 992px;
+      height: 420px;
+      margin: 100px auto
+    }
+    .inner {
+      position: relative;
+      overflow: hidden;
+      height: 454px;
+    }
+    #imglist {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
+    li {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+    }
+    /*自定义轮播动画*/
+    @keyframes play {
+      0%{
+        opacity:0;
+      }
+      100%{
+        opacity:1;
+      }
+    }
+    li.show{
+      display: block;
+      animation: play 1.5s linear;
+    }
+    .list {
+      position: absolute;
+      bottom: 0px;
+      right:30px;
+    }
+    .list i {
+      width: 40px;
+      height: 40px;
+      background-color:rgba(0,0,0,.4);
+      color: #fff;
+      float: left;
+      font-style: normal;
+      line-height: 40px;
+      font-size: 20px;
+      text-align: center;
+      margin:0 10px 46px 0;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .list i:last-child {
+      margin-right: 0;
+    }
+    .list i.current {
+      background-color: #f9490a;
+      color: #fff;
+    }
+    .arrow-left,.arrow-right {
+      position: absolute;
+      background: url("images/arr.png")no-repeat;
+      background-position: -83px  ;
+      width: 42px;
+      height: 66px;
+      left:-5px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor: pointer;
+    }
+    span.arrow-right{
+      left:949px;
+      background-position: -128px;
+    }
+    .box:hover .arrow-left{
+      background-position: 0px;
+    }
+    .box:hover .arrow-right{
+      background-position: -41px;
+    }
+  </style>
+</head>
+<body>
+<div class="box" id="box">
+  <div class="inner" id="inner">
+    <ul id="imglist">
+      <li class="show"><a href="#"><img src="images/1.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/4.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/5.jpg" alt=""></a></li>
+    </ul>
+    <div class="list" id="list">
+      <i class="current">1</i>
+      <i>2</i>
+      <i>3</i>
+      <i>4</i>
+      <i>5</i>
+    </div>
+    <div class="arrow">
+      <span class="arrow-left"></span>
+      <span class="arrow-right"></span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+<script src="jq/jquery-1.12.2.js"></script>
+<script>
+$(function(){
+  var index = 0;
+//  定义一个动画函数
+  function play(){
+    $(".list i").eq(index).addClass("current").siblings().removeClass("current");
+    $("#imglist li").eq(index).addClass("show").siblings().removeClass("show");
+  }
+//  图片序号对应图片部分
+  $(".list i").on("mouseover",function(){
+    index = $(this).index();
+    play();
+  });
+//  右箭头部分
+  $(".arrow-right").on("click",function(){
+    if(index == $(".list i").size()-1){
+        index=0;
+    }else{
+        index++;
+    }
+    play();
+  });
+//  左箭头部分
+  $(".arrow-left").on("click",function(){
+    if(index==0){
+      index = $(".list i").size()-1;
+    }else{
+      index--;
+    }
+    play();
+  });
+//  定时器自动轮播部分
+  timeid = setInterval(function(){
+    $(".arrow-right").click();
+  },1500)
+//  鼠标移入大盒子清除定时器
+  $(".box").on("mouseover",function(){
+    clearInterval(timeid);
+  });
+  //  鼠标移出大盒子继续自动轮播
+  $(".box").on("mouseout",function(){
+    timeid = setInterval(function(){
+      $(".arrow-right").click();
+    },1500)
+  });
+})
+</script>

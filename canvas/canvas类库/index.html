@@ -1,0 +1,387 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:index</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h1 id="echartjs">echartjs</h1>
+<p>ECharts，一个纯 Javascript 的图表库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE8/9/10/11，Chrome，Firefox，Safari等），底层依赖轻量级的 Canvas 类库 ZRender，提供直观，生动，可交互，可高度个性化定制的数据可视化图表。</p>
+<p>ECharts 3 中更是加入了更多丰富的交互功能以及更多的可视化效果，并且对移动端做了深度的优化。
+<img src="./images/1.jpg" alt=""></p>
+<h2 id="-a-target-_bank-href-http-echarts-baidu-com-index-html-a-"><a target="_bank" href="http://echarts.baidu.com/index.html">官网</a></h2>
+<h3 id="-a-target-_bank-href-http-echarts-baidu-com-tutorial-html-a-"><a target="_bank" href="http://echarts.baidu.com/tutorial.html">入门教程</a></h3>
+<h4 id="-echartjs">获取echartjs</h4>
+<pre><code>1 你可以通过以下几种方式获取 ECharts。
+
+2 从官网下载界面选择你需要的版本下载，根据开发者功能和体积上的需求，我们提供了不同打包的下载，如果你在体积上没有要求，可以直接下载完整版本。开发环境建议下载源代码版本，包含了常见的错误提示和警告。
+
+3 在 ECharts 的 GitHub 上下载最新的 release 版本，解压出来的文件夹里的 dist 目录里可以找到最新版本的 echarts 库。
+
+4 通过 npm 获取 echarts，npm install echarts --save，详见“在 webpack 中使用 echarts” cdn 引入，你可以在 cdnjs，npmcdn 或者国内的 bootcdn 上找到 ECharts 的最新版本。
+</code></pre><h4 id="-echarts">引入 ECharts</h4>
+<pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;!-- 引入 ECharts 文件 --&gt;
+    &lt;script src=&quot;echarts.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;/html&gt;
+</code></pre><h4 id="-">绘制一个简单图表 完整代码</h4>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;ECharts&lt;/title&gt;
+    &lt;!-- 引入 echarts.js --&gt;
+    &lt;script src=&quot;echarts.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 为ECharts准备一个具备大小（宽高）的Dom --&gt;
+    &lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: &#39;ECharts 入门示例&#39;
+            },
+            tooltip: {},
+            legend: {
+                data:[&#39;销量&#39;]
+            },
+            xAxis: {
+                data: [&quot;衬衫&quot;,&quot;羊毛衫&quot;,&quot;雪纺衫&quot;,&quot;裤子&quot;,&quot;高跟鞋&quot;,&quot;袜子&quot;]
+            },
+            yAxis: {},
+            series: [{
+                name: &#39;销量&#39;,
+                type: &#39;bar&#39;,
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><h3 id="-a-target-_bank-href-http-echarts-baidu-com-api-html-echarts-api-a-"><a target="_bank" href="http://echarts.baidu.com/api.html#echarts">API</a></h3>
+<h3 id="-a-target-_bank-href-http-www-echartsjs-com-gallery-editor-html-c-doc-example-getting-started-demo-a-"><a target="_bank" href="http://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started">在线demo</a></h3>
+<h3 id="-">绘制柱状图</h3>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;ECharts&lt;/title&gt;
+  &lt;script src=&quot;./js/echarts.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+    var option = {
+      title: {
+        text: &#39;ECharts123 入门示例&#39;
+      },
+      tooltip: {
+        show: false
+      },
+      legend: {
+        data: [&#39;销量&#39;]
+      },
+      xAxis: {
+        data: [&quot;衬衫&quot;, &quot;羊毛衫&quot;, &quot;雪纺衫&quot;, &quot;裤子&quot;, &quot;高跟鞋&quot;, &quot;袜子&quot;, &quot;牛肉拉面&quot;]
+      },
+      yAxis: {},
+      series: [{
+        name: &#39;销量&#39;,
+        type: &#39;bar&#39;,
+        data: [5, 20, 36, 10, 10, 20, 80]
+      }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h3 id="-">绘制折线图</h3>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;ECharts&lt;/title&gt;
+    &lt;script src=&quot;./js/echarts.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+        option = {
+            title: {
+                text: &#39;对数轴示例&#39;,
+                left: &#39;center&#39;
+            },
+            tooltip: {
+                trigger: &#39;item&#39;,
+                formatter: &#39;{a} &lt;br/&gt;{b} : {c}&#39;
+            },
+            legend: {
+                left: &#39;left&#39;,
+                data: [&#39;2的指数&#39;, &#39;3的指数&#39;]
+            },
+            xAxis: {
+                type: &#39;category&#39;,
+                name: &#39;x&#39;,
+                splitLine: { show: false },
+                data: [&#39;一&#39;, &#39;二&#39;, &#39;三&#39;, &#39;四&#39;, &#39;五&#39;, &#39;六&#39;, &#39;七&#39;, &#39;八&#39;, &#39;九&#39;]
+            },
+            grid: {
+                left: &#39;3%&#39;,
+                right: &#39;4%&#39;,
+                bottom: &#39;3%&#39;,
+                containLabel: true
+            },
+            yAxis: {
+                type: &#39;log&#39;,
+                name: &#39;y&#39;
+            },
+            series: [
+                {
+                    name: &#39;3的指数&#39;,
+                    type: &#39;line&#39;,
+                    data: [1, 3, 9, 27, 81, 247, 741, 2223, 6669]
+                },
+                {
+                    name: &#39;2的指数&#39;,
+                    type: &#39;line&#39;,
+                    data: [1, 2, 4, 8, 16, 32, 64, 128, 256]
+                },
+                {
+                    name: &#39;1/2的指数&#39;,
+                    type: &#39;line&#39;,
+                    data: [1 / 2, 1 / 4, 1 / 8, 1 / 16, 1 / 32, 1 / 64, 1 / 128, 1 / 256, 1 / 512]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h3 id="-">绘制饼图</h3>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;title&gt;ECharts&lt;/title&gt;
+  &lt;script src=&quot;./js/echarts.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id=&quot;main&quot; style=&quot;width: 600px;height:400px;&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var myChart = echarts.init(document.getElementById(&#39;main&#39;));
+    option = {
+      backgroundColor: &#39;#2c343c&#39;,
+
+      title: {
+        text: &#39;Customized Pie&#39;,
+        left: &#39;center&#39;,
+        top: 20,
+        textStyle: {
+          color: &#39;#ccc&#39;
+        }
+      },
+
+      tooltip: {
+        trigger: &#39;item&#39;,
+        formatter: &quot;{a} &lt;br/&gt;{b} : {c} ({d}%)&quot;
+      },
+
+      visualMap: {
+        show: false,
+        min: 80,
+        max: 600,
+        inRange: {
+          colorLightness: [0, 1]
+        }
+      },
+      series: [
+        {
+          name: &#39;访问来源&#39;,
+          type: &#39;pie&#39;,
+          radius: &#39;55%&#39;,
+          center: [&#39;50%&#39;, &#39;50%&#39;],
+          data: [
+            { value: 335, name: &#39;直接访问&#39; },
+            { value: 310, name: &#39;邮件营销&#39; },
+            { value: 274, name: &#39;联盟广告&#39; },
+            { value: 235, name: &#39;视频广告&#39; },
+            { value: 400, name: &#39;搜索引擎&#39; }
+          ].sort(function (a, b) { return a.value - b.value; }),
+          roseType: &#39;radius&#39;,
+          label: {
+            normal: {
+              textStyle: {
+                color: &#39;rgba(255, 255, 255, 0.3)&#39;
+              }
+            }
+          },
+          labelLine: {
+            normal: {
+              lineStyle: {
+                color: &#39;rgba(255, 255, 255, 0.3)&#39;
+              },
+              smooth: 0.2,
+              length: 10,
+              length2: 20
+            }
+          },
+          itemStyle: {
+            normal: {
+              color: &#39;#c23531&#39;,
+              shadowBlur: 200,
+              shadowColor: &#39;rgba(0, 0, 0, 0.5)&#39;
+            }
+          },
+
+          animationType: &#39;scale&#39;,
+          animationEasing: &#39;elasticOut&#39;,
+          animationDelay: function (idx) {
+            return Math.random() * 200;
+          }
+        }
+      ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h1 id="konva-js">konva.js</h1>
+<p>Konva.js 一个基于 Canvas 开发的 2d JavaScript框架库, 它可以轻松的实现桌面应用和移动应用中的图形交互交互效果..</p>
+<h2 id="-">特色</h2>
+<ul>
+<li>内置支持HDPI设备且文字和图形进行像素优化</li>
+<li>面向对象API</li>
+<li>节点嵌套和事件冒泡</li>
+<li>高性能事件检测通过颜色哈希地图</li>
+<li>支持分层</li>
+<li>节点缓存以提高绘图性能</li>
+<li>节点可以转换成数据URL，图像数据或图像对象</li>
+<li>动画支持</li>
+<li>补间动画</li>
+<li>可配置约束拖放边界</li>
+<li>滤镜</li>
+<li>可以使用包括矩形，圆形，图像，文本，线条，多边形，SVG路径等形状</li>
+<li>自定义形状</li>
+<li>事件驱动架构，使开发人员能够订阅更改事件，图层绘制事件等</li>
+<li>序列化和反序列化</li>
+<li>支持选择器例如 stage.get（&#39;＃foo&#39;）和layer.get（&#39;。bar&#39;）;</li>
+<li>支持PC端和移动端事件</li>
+<li>AMD 支持</li>
+<li>自定义命中空间</li>
+<li>更多...</li>
+</ul>
+<h2 id="-a-href-http-www-konvajs-com-docs-a-"><a href="http://www.konvajs.com/docs/">中文文档</a></h2>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

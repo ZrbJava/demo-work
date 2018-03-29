@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    canvas{
+      border: 1px solid #000;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    img{
+      width: 600px;
+      height: 600px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <img src="./images/1.jpg" alt="">
+  <canvas width="600" height="600"></canvas>
+  <script>
+    var cas=document.querySelector("canvas");
+    var ctx=cas.getContext("2d");
+    var img=document.querySelector("img");
+    ctx.fillRect(0,0,600,600);
+
+    // 橡皮擦功能
+    // 开关
+    var isClear=false;
+
+    cas.onmousedown=function(e){
+      isClear=true;
+    }
+    cas.onmousemove=function(e){
+      // 判断开关
+      if(!isClear){
+        return;
+      }
+
+      // clearRect(x,y,w,h);
+      ctx.clearRect(e.offsetX,e.offsetY,50,50);
+    }
+    cas.onmouseup=function(e){
+      isClear=false;
+    }
+    cas.onmouseout=function(e){
+      isClear=false;
+    }
+    setRandom();
+    function setRandom(){
+      // 获取 1到5的随机数
+      var random=Math.round(Math.random()*4)+1;
+      // console.log(random);
+      img.src="./images/"+random+".jpg";
+    }
+  </script>
+</body>
+</html>

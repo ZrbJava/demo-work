@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>画文字</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    canvas{
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<canvas width="600" height="600"  ></canvas>
+</body>
+<script>
+  var cas=document.querySelector("canvas");
+  var ctx=cas.getContext("2d");
+  
+//  ctx.font = "华纹彩云 50px " ---这样设置无效
+  ctx.font = "50px 华纹彩云 "
+  //设置画笔样式
+  ctx.strokeStyle = "red"
+  
+  ctx.strokeText("hello wold!",cas.width/2,cas.height/2);
+  
+  
+  
+//  创建第二排文字
+  ctx.font = "50px 华纹彩云 "
+// 创建一个渐变色
+  var gradient = ctx.createLinearGradient(0,0,cas.width,cas.height);
+  //添加颜色
+  gradient.addColorStop(0,"yellow")
+  gradient.addColorStop(1,"green")
+//  gradient.addColorStop(1,"blue")
+  
+  ctx.strokeStyle = gradient;
+  ctx.font = "50px 宋体"
+
+  ctx.strokeText("或许这就是命！",cas.width/2,cas.height/4);
+  
+
+
+
+
+</script>
+</html>

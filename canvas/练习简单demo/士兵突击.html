@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="600"></canvas>
+</body>
+<script>
+
+  // 获取canvas dom
+  var cas = document.querySelector("canvas");
+  var ctx = cas.getContext("2d");
+
+  var img = new Image();
+  img.src = "./images/士兵.png";
+
+  // 要切割的y坐标的索引
+  var yIndex = 3;
+  // 士兵的坐标
+  var point = { x: 0, y: 0 };
+  img.onload = function () {
+    // ctx.drawImage(img,0,0);
+    /* 
+    1 小人 原地走动
+    2 定时器  其实就是改变一个参数 index
+    3 改变小人的方向 其实是改变 要切割原图的y坐标 
+     */
+    var index = -1;
+
+    // 开始定时器
+    setInterval(function () {
+      // index  0 - 3
+      /* 
+      index=1  index=1%4=1 
+      index=2  index=2%4=2
+      index=3  index=3%4=3
+      index=4  index=4%4=0 
+      index=0  0%4=0 
+       */
+      index++;
+      index = index % 4;
+
+      //  清除矩形
+      // ctx.clearRect(0, 0, img.width, img.height);
+      // 全部重置
+      cas.width=cas.width;
+      ctx.drawImage(img,
+        // 原图的要切割的x
+        img.width / 4 * index,
+        // 原图的要切割的y
+        img.height / 4 * yIndex,
+        // 原图切多宽
+        img.width / 4,
+        // 原图切多高
+        img.height / 4,
+        // 放在画布的x
+        point.x,
+        // 放在画布的y
+        point.y,
+        // 画成多宽
+        img.width / 4,
+        // 画成多高
+        img.height / 4
+      );
+    }, 10);
+
+
+  }
+
+  /* 
+  w s a d  
+  w  yindex=3 
+  s  yindex=0
+  a  yindex=1
+  d  yindex=2 
+
+  上  point.y -- 
+  下  point.y+
+  left: x--
+  right:x++ 
+   */
+
+  // 绑定键盘事件
+  document.body.addEventListener("keyup", function (e) {
+    switch (e.key) {
+      case "w":
+        yIndex = 3;
+        break;
+      case "s":
+        yIndex = 0;
+        break;
+      case "a":
+        yIndex = 1;
+        break;
+      case "d":
+        yIndex = 2;
+        break;
+      default:
+        break;
+    }
+  });
+
+  // 绑定键盘按下事件
+  document.body.addEventListener("keydown", function (e) {
+    switch (e.key) {
+      case "ArrowUp":
+        point.y -= 10;
+        break;
+      case "ArrowDown":
+        point.y += 10;
+        break;
+      case "ArrowLeft":
+        point.x -= 10;
+        break;
+      case "ArrowRight":
+        point.x += 10;
+        break;
+      default:
+        break;
+    }
+  })
+</script>
+
+</html>

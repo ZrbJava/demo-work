@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="600"></canvas>
+  <!-- 
+    1 旋转的是坐标系
+    2 旋转的值 是叠加的 先 rotate(90) 再旋转   rotate(180)  最终是  rotate(270)
+    3 旋转的单位 弧度 
+        Math.PI/180* num 
+    4 旋转的中心点 原点 坐标系的 0  0 位置 
+    5 一般也是 做图形固定 位置不固定的效果
+    
+   -->
+</body>
+<script>
+  var cas = document.querySelector("canvas");
+  var ctx = cas.getContext("2d");
+
+  // 1 先把坐标系移动到 canvas标签(600*600) 中心
+  ctx.translate(300,300);
+  // ctx.strokeRect(0,0,5,5);
+
+  setInterval(function(){
+    ctx.rotate(degToArc(100));
+    ctx.strokeRect(0,0,100,100);
+    // ctx.strokeRect(-50,-50,100,100);
+  },0.1);
+
+
+  function degToArc(num){
+    return Math.PI/180*num;
+  }
+</script>
+
+</html>

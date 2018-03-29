@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <!-- value值 不能写其他 只能写6位数的16进制的颜色 -->
+    <input type="color" class="c1" value="#00ff00" >
+    <input type="color" class="c2" value="#0094ff">
+  </div>
+  <canvas width="600" height="600"></canvas>
+  <!-- 
+    分析:
+    1 down up 
+    2 down
+      a 记录按下的坐标
+    3 up
+      a 记录离开坐标
+      b 填入到 ctx.createLinearGradient(开始的坐标,结束的坐标);
+        1 坐标都是相对于画布的!! 
+      c 添加渐变的颜色 取决于 两个color按钮 
+   -->
+</body>
+<script>
+  var cas = document.querySelector("canvas");
+  var title = document.querySelector("title");
+  var c1 = document.querySelector(".c1");
+  var c2 = document.querySelector(".c2");
+  var ctx = cas.getContext("2d");
+
+  // 相对于画布的按下的坐标
+  var startX, startY;
+
+  // 给body绑定鼠标按下事件
+  document.body.onmousedown = function (e) {
+    // 如何获取相对于画布的坐标 
+    // console.log(e);
+    // console.dir(cas);
+
+    // 相对于body的坐标
+    var clientX = e.clientX;
+    var clientY = e.clientY;
+
+    // 获取画布相对于body的坐标
+    var offsetLeft = cas.offsetLeft;
+    var offsetTop = cas.offsetTop;
+
+    // 获取相对于画布的坐标
+    startX = clientX - offsetLeft;
+    startY = clientY - offsetTop;
+    // title.innerHTML="x:"+startX+" y:"+startY;
+  }
+
+  // 鼠标抬起事件
+  document.body.onmouseup = function (e) {
+    // 相对于body的坐标
+    var clientX = e.clientX;
+    var clientY = e.clientY;
+
+    // 获取画布相对于body的坐标
+    var offsetLeft = cas.offsetLeft;
+    var offsetTop = cas.offsetTop;
+
+    // 获取相对于画布的坐标
+    var endX = clientX - offsetLeft;
+    var endY = clientY - offsetTop;
+
+    // 创建渐变对象
+    var g=ctx.createLinearGradient(startX,startY,endX,endY);
+    // 添加颜色
+    g.addColorStop(0,c1.value);
+    g.addColorStop(1,c2.value);
+
+    // 使用了渐变
+    ctx.fillStyle=g;
+
+    // 创建图形 
+    ctx.fillRect(0,0,600,600);
+    
+  }
+</script>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body{
+      text-align: center;
+    }
+    canvas{
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<canvas width="600" height="600"  ></canvas>
+</body>
+<script>
+  var cas=document.querySelector("canvas");
+  var ctx=cas.getContext("2d");
+  //画笔颜色
+  ctx.strokeStyle  = "blue"
+  //阴影大小
+  ctx.shadowBlur=10;
+  //阴影颜色
+  ctx.shadowColor = "blue";
+  //水平模糊距离
+  ctx.shadowOffsetX = 10;
+  
+  //垂直模糊距离
+  ctx.shadowOffsetY = 10;
+  
+//  绘制图层
+  ctx.strokeRect(350,350,100,100);
+//  填充图层
+
+    ctx.fillRect(50,50,100,100);
+  
+    ctx.font = "50px 华纹彩云"
+    ctx.strokeText("jackie_bobo",200,200)
+  
+  
+
+
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>绘画视频帧</title>
+</head>
+<body>
+
+<p>要使用的视频:</p>
+<video id="video1" src="res/mhls.mp4" controls width="270" autoplay muted>
+  <!--<source src="res/mhls.mp4" type='video/mp4'>-->
+</video>
+
+<p>画布 (代码在每20毫秒绘制当前的视频帧):</p>
+<canvas id="myCanvas" width="270" height="135" style="border:1px solid #d3d3d3;">
+  您的浏览器不支持 HTML5 canvas 标签。
+</canvas>
+<script>
+  var v=document.getElementById("video1");
+  var c=document.getElementById("myCanvas");
+  ctx=c.getContext('2d');
+  v.addEventListener('play', function()
+  {
+    var i=window.setInterval(function() {ctx.drawImage(v,5,5,260,125)},20);
+  },false);
+  v.addEventListener('pause',function()
+  {
+    window.clearInterval(i);
+  },false);
+  v.addEventListener('ended',function()
+  {
+    clearInterval(i);
+  },false);
+</script>
+
+</body>
+</html>

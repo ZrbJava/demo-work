@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>旋转案例</title>
+  <style>
+    body{
+      text-align:center;
+    }
+    canvas{
+      border:1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<canvas width="600" height="500"></canvas>
+
+
+</body>
+</html>
+<script>
+
+  var cas = document.querySelector("canvas");
+  var ctx = cas.getContext("2d");
+  var totalDeg = 0;
+  ctx.translate(cas.width/2,cas.height/2);
+  
+  var timeid = setInterval(function(){
+    ctx.rotate(degToArc(1));
+    ctx.strokeRect(0,0,1,100);
+    
+    if(totalDeg>0&&totalDeg<=120){
+      ctx.strokeStyle = "red";
+    }
+    
+    if(totalDeg>120&&totalDeg<=240){
+      ctx.strokeStyle = "green";
+    }
+    
+    if(totalDeg>240&&totalDeg<=360){
+      ctx.strokeStyle = "blue";
+    }
+    
+    totalDeg+=1;
+    if(totalDeg == 360){
+      clearInterval(timeid)
+    }
+  },10)
+  
+  
+//角度转弧度
+  function degToArc(num){
+    return Math.PI/180*num;
+  }
+</script>

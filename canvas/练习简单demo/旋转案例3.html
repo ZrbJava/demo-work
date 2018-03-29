@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="600"></canvas>
+</body>
+<script>
+  var cas = document.querySelector("canvas");
+  var ctx = cas.getContext("2d");
+
+  // 设置坐标系位移到canvas标签的中心点
+  ctx.translate(300, 300);
+
+  // 一共旋转的角度
+  var totalDeg = 0;
+  var timeId = setInterval(function () {
+    totalDeg += 1;
+    ctx.rotate(degToArc(1));
+    // 判断颜色  
+    // if(totalDeg<360&&totalDeg>240)
+    if (totalDeg < 360) {
+      ctx.strokeStyle = "red";
+    }
+    if (totalDeg < 240) {
+      ctx.strokeStyle = "blue";
+    }
+    if (totalDeg < 120) {
+      ctx.strokeStyle = "yellow ";
+    }
+    ctx.strokeRect(0, 0, 1, 300);
+    // 判断 定时器
+    if (totalDeg == 360) {
+      clearInterval(timeId);
+    }
+  }, 10);
+  function degToArc(num) {
+    return Math.PI / 180 * num;
+  }
+</script>
+
+</html>

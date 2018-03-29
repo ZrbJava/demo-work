@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+      *{
+        margin:0;
+        padding:0;
+      }
+      body{
+        position:relative;
+      }
+       div{width:100px;
+        height:100px;
+        position:absolute;
+        top:0px;
+        left:0px;
+       }
+        img{
+        width:100px;
+        height:100px;
+        display:block;
+        }
+    </style>
+</head>
+<body>
+    <div id="did" style="left:0px; top:0px;">
+        <img src="images/zuqiu.jpg" alt="" />
+    </div>
+</body>
+<script type="text/javascript">
+    divobj=document.getElementById('did');
+    y=0;
+    yv=10;
+    x = 0;
+    xv = 10;
+    // 获取屏幕高度
+    screenHeight=document.documentElement.clientHeight;
+    //获取屏幕的宽度
+    screenWidth = document.documentElement.clientWidth;
+    divHeight=100;
+    Height=screenHeight-divHeight;
+    width = screenWidth - divHeight;
+    console.log(width);
+    //弹球没0.1s下降的距离
+    var time = setInterval(function(){
+                y+=yv;
+                if(y>=Height){
+                    // 当y==Height时，让yv=-yv,使得其在定时器的作用下越加越小，即往回弹
+                    yv=-yv;
+                    divobj.style.top=y+'px';
+                }else{
+                    if(y==0){
+                        yv=-yv;
+                    }
+                    divobj.style.top=y+'px';
+                }
+        //          ++++++++++++++++++++++++++++
+        //          弹力球往x轴方向运动部分
+},1);
+    var time1 = setInterval(
+      function(){
+        x+=xv;
+        if(x>=width){
+          xv = -xv;
+          divobj.style.left = x+"px";
+        }else{
+          if(x==0){
+            xv=-xv;
+          }
+          divobj.style.left=x+'px';
+        }
+      },1)
+</script>
+</html>

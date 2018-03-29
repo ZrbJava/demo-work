@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #fff;
+        }
+        .container {
+            width: 800px;
+            height: 450px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            box-shadow: 0 0 10px 10px #000;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ccc;
+            position: relative;
+        }
+        video {
+            float: left;
+            width: 70%;
+            height: 380px;
+        }
+        ul {
+            float: right;
+            width: 25%;
+            height: 380px;
+        }
+
+        .play,.pause,.volume {
+            font-size: 40px;
+            line-height: 50px;
+            text-align: center;
+            color: orange;
+            cursor: pointer;
+        }
+        .play,.pause {
+            /*border: 1px solid #000;*/
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 10px;
+            top: 400px;
+        }
+        .play {
+            display: none;
+        }
+        #progress {
+            width: 400px;
+            position: absolute;
+            top: 420px;
+            left: 80px;
+        }
+        .volume {
+            position: absolute;
+            top: 400px;
+            left: 500px;
+            width: 50px;
+            height: 50px;
+        }
+        .volume > input{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: none;
+        }
+        .volume > input.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video src="../../ex/static/猫和老鼠.mp4" autoplay></video>
+        <ul>
+            <li><a href="javascript:void(0);" data-src="../../ex/static/猫和老鼠.mp4">猫和老鼠</a></li>
+            <li><a href="javascript:void(0);" data-src="../../ex/static/蜡笔小新.mp4">蜡笔小新</a></li>
+            <li><a href="javascript:void(0);" data-src="../../ex/static/01.mp4">爆笑虫子</a></li>
+        </ul>
+        <div class="controls">
+            <div class="play iconfont icon-bofang"></div>
+            <div class="pause iconfont icon-zanting"></div>
+            <input type="range" min="0" value="0" max="100" id="progress"/>
+            <div class="volume iconfont icon-shengyin">
+                <input type="range"  min="0" value="100" max="100"/>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        //点击播发和暂停
+        var pauseBtn = document.querySelector(".pause");
+        var playBtn = document.querySelector(".play");
+        var video = document.querySelector("video");
+        var progress = document.querySelector("#progress");
+        var volume = document.querySelector(".volume");
+        var volumeRange = volume.children[0];
+        pauseBtn.onclick = function(){
+            //视频暂停
+            video.pause();
+            //显示播放按钮
+            playBtn.style.display = "block";
+            //把暂停按钮隐藏
+            pauseBtn.style.display = "none";
+        }
+        playBtn.onclick = function(){
+            //视频播放
+            video.play();
+            //显示暂停按钮
+            pauseBtn.style.display = "block";
+            //把播放按钮隐藏
+            playBtn.style.display = "none";
+        }
+
+        //切换视频
+        var list = document.querySelectorAll("ul > li > a");
+        for(var i = 0; i < list.length ; i++){
+            list[i].onclick = function(){
+                //获取视频对应的地址，切换src
+                var src = this.dataset.src;
+                //把src直接设置给视频播放控件
+                video.src = src;
+            }
+        }
+        //让进度条随着视频的播放跟新
+        // 视频的播放中事件： timeupdaet
+        video.ontimeupdate = function(){
+            //获取当前进度
+            var current = video.currentTime;
+            //计算出百分比
+            var percent = current / video.duration;
+            //设置给range标签
+            progress.value = percent * 100;
+        }
+
+        //拖动range让视频的进度修改
+        progress.oninput=function(){
+            //获取当前的value
+            var value = this.value;
+            //计算出应该对应的时间 = value / 100 * duration
+            var current = value / 100 * video.duration;
+            //设置给视频的进度
+            video.currentTime = current;
+        }
+        //调节音量
+        volume.onclick = function(){
+            //显示或者隐藏其子元素range
+            volumeRange.classList.toggle("show");
+        }
+        volumeRange.oninput = function(){
+            //获取当前值，计算出对应的百分比，设置给视频的音量
+            var value = this.value;
+            video.volume = value / 100;
+        }
+    </script>
+</body>
+</html>

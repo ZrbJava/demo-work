@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    canvas {
+      border: 1px solid #000;
+    }
+
+    .randomColor {
+      /* animation:  */
+      animation-name: ani_randomColor;
+      /* 持续的时间 */
+      animation-duration: 0.1s;
+      /* 速度曲线 */
+      animation-timing-function: linear;
+      /* 循环次数 infinite 死循环 */
+      animation-iteration-count: infinite;
+      /* 方向 alternate 先正后反 */
+      animation-direction: alternate;
+    }
+
+    /* 亮瞎眼的动画 */
+
+    @keyframes ani_randomColor {
+      0% {
+        background-color: red;
+      }
+      50% {
+        background-color: orange;
+      }
+      100% {
+        background-color: black;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="600" height="600"></canvas>
+  <button>下载</button>
+  <!-- 
+    分析:
+    1 在线画图
+    2 点击按钮 下载
+      a 把canvas变成一张图片-> 获取canvas图片的路径 var src= cas.toDataURL()
+      b 如何触发下载 
+          动态创建一个标签 
+          aDom.href=src;
+          aDom.download="五年";
+          aDom.click()
+   -->
+</body>
+<script>
+  var cas = document.querySelector("canvas");
+  var btn = document.querySelector("button");
+  var ctx = cas.getContext("2d");
+
+  var isDraw = false;
+  // 填充白色
+  ctx.fillStyle="white";
+  ctx.fillRect(0,0,600,600);
+  cas.onmousedown = function (e) {
+    isDraw = true;
+    ctx.beginPath();
+
+  }
+  cas.onmousemove = function (e) {
+    // 判断开关
+    if (!isDraw) {
+      return;
+    }
+
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+
+  }
+  cas.onmouseup = function (e) {
+    isDraw = false;
+  }
+  cas.onmouseout = function (e) {
+    isDraw = false;
+  }
+
+  // 下载按钮
+  btn.onclick = function () {
+
+
+    /* 
+    cas.toDataURL()
+    1 返回是一个base64格式路径
+    2 toDataURL(图片的格式,质量(0-1))    image/png 默认值 
+    3 type 类型 image/png 或 image/jpeg  
+    4 image/png  不能压缩
+    5 image/jpeg 可以压缩 
+       a 默认 会把透明部分填充成黑色
+       b 在开始画图之前 手动 fillRect() 变成白色 !!!! 
+    6 质量 0 最低  1 最高 
+     */
+    var src = cas.toDataURL("image/jpeg",1);
+
+    var aDom = document.createElement("a");
+    aDom.href = src;
+    aDom.download = "abc";
+    aDom.click();
+  }
+</script>
+
+</html>
