@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 此处以v2ex为例
+        // https://www.v2ex.com/api/topics/latest.json?p=1
+        var host = "https://www.v2ex.com/api/topics/latest.json"
+        var obj = {"p":1}
+        function _obj2uri(obj) {
+            return Object.keys(obj).map(function (k) {
+                return encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]);
+            }).join('&');
+        }
+        
+        console.log("请求地址为："+ host +"?"+ _obj2uri(obj));
+    </script>
+</body>
+
+</html>
