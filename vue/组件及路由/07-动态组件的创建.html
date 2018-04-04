@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li><a href="#" @click="currentCom='index'">首页</a></li>
+        <li><a href="#" @click="currentCom='productType'">蔬菜</a></li>
+        <li><a href="#" @click="currentCom='productType'">水果</a></li>
+        <li><a href="#" @click="currentCom='productType'">肉类</a></li>
+      </ul>
+
+      <!-- 动态组件组件通过一个component标签创建，他有一个is属性，is属性的值是谁，这个标签就会渲染哪个组件 -->
+      <component :is="currentCom"></component>
+    </div>
+    <script>
+      Vue.component('index', {
+        template: '<div>首页</div>'
+      })
+
+      Vue.component('productType', {
+        template: '<div>显示商品分类编号</div>'
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          currentCom: ''
+        }
+      })
+    </script>
+  </body>
+</html>

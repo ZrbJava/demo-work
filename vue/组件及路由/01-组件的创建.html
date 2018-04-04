@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <!-- 注意，这个template模板不能放到vue的管辖范围之内 -->
+    <template id="tpl">
+        <div>index-c组件</div>
+    </template>
+
+    <script type="x-template" id="tpl2">
+      <div>index-d组件</div>
+    </script>
+
+    <div id="app">
+      <!-- 使用组件：就像使用html标签一样使用 -->
+      <login-a></login-a>
+      <index-a></index-a>
+      <index-b></index-b>
+      <index-c></index-c>
+      <index-d></index-d>
+    </div>
+    <script>
+
+      // 有三种方法创建组件
+      // 注意，三种方法的template中只能有一个根节点，如果多写了会报错
+
+      // 第一种：结合Vue.extend()和Vue.component()方法创建组件
+      // Vue.extend()会返回一个组件的构造函数，最后将这个得到构造函数给到Vue.component()，最后由Vue.component()去创建组件
+      // Vue.extend()方法中可以去配置我们的组件的内容，比如组件的模板……
+      var Login = Vue.extend({
+        // template属性用来指定模板
+        template: "<div>我是登陆组件<input type='text'></div>"
+      })
+
+      // Vue.component()方法有两个参数：1. 组件名字 2. 组件构造函数
+      // 注意，组件的名字写法两种，一种全部小写，一种驼峰命名；当使用全部小写时，在html中就全部小写；当使用驼峰命名时，在html中就需要使用“-”
+      Vue.component('loginA', Login)
+
+
+
+
+      // 第二种：直接使用Vue.component()方法创建组件
+      Vue.component('indexA', {
+        template: '<div>index-a组件</div>'
+      })
+      // 上面这种方式的本质其实还是调用了Vue.extend()
+      Vue.component('indexB', Vue.extend({
+        template: '<div>index-b组件</div>'
+      }))
+
+
+
+
+      // 第三种：使用模板创建组件
+      // 模板的创建有两种方式：第一种使用template标签；第二种使用script标签
+      Vue.component('indexC', {
+        template: '#tpl'
+      })
+
+      Vue.component('indexD', {
+        template: '#tpl2'
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>

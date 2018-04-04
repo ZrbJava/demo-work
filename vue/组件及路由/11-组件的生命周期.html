@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./vue2.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{info}}
+    {{test()}}
+    <button @click="info='hello1'" ref="button">更新info</button>
+    <button @click="destroy">销毁组件</button>
+  </div>
+  <script>
+    var myVm=new Vue({
+      el:"#app",
+      data:{
+          info:"hello"
+      },
+      // 在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+      beforeCreate:function(){
+          console.log("===============beforeCreate============================================")
+          // $el表示Vue 实例使用的根 DOM 元素。
+          console.log('$el', this.$el);
+          // $data Vue 实例观察的数据对象
+          console.log('$data', this.$data);
+          // $refs表示所有的使用了ref的html元素对象
+          console.log('$refs', this.$refs);
+          console.log("info:", this.info)
+      },
+      // 在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。
+      created:function(){
+          console.log("===============created=======================================")
+          console.log('$el', this.$el);
+          console.log('$data', this.$data);
+          console.log('$refs', this.$refs);
+          console.log("info:", this.info)
+      },
+      // render函数首次被调用，但是指令尚未被解析
+      beforeMount:function(){
+          console.log("===============beforeMount=========================================")
+          console.log('$el', this.$el);
+          console.log('$data', this.$data);
+          console.log('$refs', this.$refs);
+          console.log("info:", this.info)
+      },
+      mounted:function(){
+          console.log("===============mounted===========================================")
+          console.log('$el', this.$el);
+          console.log('$data', this.$data);
+          console.log('$refs', this.$refs);
+          console.log("info:", this.info)
+      },
+      beforeUpdate:function(){
+          console.log("===============beforeUpdate============================================");
+
+      },
+      updated:function(){
+          console.log("===============updated======================================================");
+      },
+      beforeDestroy:function(){
+          console.log("===============beforeDestroy===============================================")
+          console.log('$el', this.$el);
+          console.log('$data', this.$data);
+          console.log('$refs', this.$refs);
+          console.log("info:", this.info)
+      },
+      destroyed:function(){
+        console.log("===============destroyed================================================")
+        console.log('$el', this.$el);
+        console.log('$data', this.$data);
+        console.log('$refs', this.$refs);
+        console.log("info:", this.info)
+      },
+      methods: {
+        test() {
+          console.log('事件可用')
+        },
+        destroy() {
+          // 表示销毁组件
+          this.$destroy()
+        },
+        udpateinfo() {
+          this.test()
+          this.info = 'hello2'
+        }
+      }
+  })
+  </script>
+</body>
+</html>

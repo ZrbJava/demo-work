@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+    <!-- 1. 引入vue-router -->
+    <script src="./vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <!-- router-link标签有一个to属性，它表示将要跳转到的路径（注意to属性要和下面定义的路由规则中的path对应）
+          这个router-link将来要被渲染成a标签，它的to属性会被渲染成a标签的href属性，并在它的值前面加了一个#
+        -->
+        <li><router-link to="/index">首页</router-link></li>
+        <li><router-link to="/product_type/22">蔬菜</router-link></li>
+        <li><router-link to="/product_type/33">水果</router-link></li>
+        <li><router-link to="/product_type/44">肉类</router-link></li>
+      </ul>
+
+      <!-- 5. 将路由规则匹配到的组件放进一个坑里面去，这个坑就是我们的router-view -->
+      <router-view></router-view>
+    </div>
+    <script>
+
+      // 2. 定义路由需要的组件
+      // 定义首页组件
+      var index = Vue.component('index', {
+        template: '<div>首页</div>'
+      })
+      // 定义商品分类组件
+      var productType = Vue.component('productType', {
+        // 在html中获取路由参数，通过$route.params.参数名
+        template: '<div>显示商品分类编号{{$route.params.id}}</div>'
+      })
+
+      // 3. 创建路由，通过VueRouter()这个构造函数创建
+      var myRouter = new VueRouter({
+        // 它里面有属性routes，它是一个数组，这个数组中包含的是对象，每个对象就表示一个路由规则
+        // 每个路由对象中包含有：name: 表示路由规则的名称；path：表示路径；component：路径对应的组件
+        routes: [
+          // 下面这个path前要加/
+          {name: 'index', path: '/index', component: index},
+          // 给路由规则加参数：通过一个冒号+参数名
+          {name: 'productType', path: '/product_type/:id', component: productType}
+        ]
+      })
+
+      var vm = new Vue({
+        el: '#app',
+        // 4. 将创建出来的路由注入到vue实例中，通过一个router属性;这样就能让整个应用程序拥有路由
+        router: myRouter,
+        data: {
+          currentCom: ''
+        },
+        mounted () {
+          // 在js中获取路由参数this.$route.params.参数名
+          console.log(this.$route.params.id);
+        }
+      })
+    </script>
+  </body>
+</html>

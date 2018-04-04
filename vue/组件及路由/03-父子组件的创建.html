@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 注意：使用子组件不能直接在father标签中，嵌套son标签，这样写son就不是子组件，而是插槽“slot” -->
+      <father></father>
+    </div>
+    <script>
+      // 创建一个father组件
+      Vue.component('father', {
+        // 2. 使用子组件
+        template: '<div>我是父组件<son></son></div>',
+        // 1. 创建子组件要写在components属性中,它是一个对象
+        components: {
+          // 创建son组件, 它也有配置项，它的配置项和父组件的写法是一样的
+          son: {
+            template: '<div>我是子组件</div>'
+          }
+        }
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>

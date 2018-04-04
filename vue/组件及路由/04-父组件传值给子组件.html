@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <father></father>
+    </div>
+    <script>
+      // 创建一个father组件
+      Vue.component('father', {
+        // 2. 在子组件中给下面定义好的坑传值
+        template: '<div>我是父组件,我给我的儿子取名叫{{mySonName}}<son :myName="mySonName"></son></div>',
+        data() {
+          return {
+            mySonName: '张三'
+          }
+        },
+        components: {
+          son: {
+            // 1. 定义一个坑，专门用来接收从父组件中传递过来的值
+            // 这个坑是props属性，它是一个数组，里面跟一个值,这个值就可以用来接收从父组件传递过来的值
+            props:['myName'],
+            // 属性校验
+            // props: {
+            //   myName: String
+            // },
+            template: '<div>我是子组件,我爸爸给我取名叫{{myName}}</div>'
+          }
+        }
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>

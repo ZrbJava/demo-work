@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 使用组件 -->
+      <show-com></show-com>
+    </div>
+    <script>
+      // 创建一个演示组件
+      Vue.component('showCom', {
+        template: `<div>
+                          <p v-show="isVisible">hahah</p>
+                          <button @click="toggle">点击</button>
+                        </div>`,
+        // 注意，data属性不能像以前那样，直接使用对象的方式了，而要使用函数，返回一个对象，因为对象是按引用传递，如果多个组件同时使用了同一个对象的话，会造成数据篡改。而使用函数会返回得到一个新的对象，避免数据篡改的情况
+        data () {
+          return {
+            isVisible: false
+          }
+        },
+        methods: {
+          toggle() {
+            this.isVisible = !this.isVisible
+          }
+        }
+        // 下面写法错误
+        // data: {
+        //   isVisible: false
+        // }
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>

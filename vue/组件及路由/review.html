@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{name}}
+      <p v-text="name"></p>
+      <p v-html="age"></p>
+      <p :name="name">动态绑定的属性</p>
+      <ul>
+        <li v-for="(item, index) in user" :key="index">{{item.name}}:{{item.age}}</li>
+      </ul>
+      <input type="text" v-model="name">
+      <button @click="change">绑定事件</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          name: 'xiaoming',
+          age: '<span>12</span>',
+          user: [
+            {name: 'jack', age: 21},
+            {name: 'rose', age: 21}
+          ]
+        },
+        methods: {
+          change() {
+            this.name = "李四"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

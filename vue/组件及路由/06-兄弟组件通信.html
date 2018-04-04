@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <father></father>
+    </div>
+    <script>
+
+      // 兄弟组件间的通信通过事件总线（event bus）来做，它是一个空的vue实例
+      // 1. 创建事件总线
+      var eventBus = new Vue();
+
+      // 创建一个father组件
+      Vue.component('father', {
+        template: `
+                        <div>
+                          <son></son>
+                          <daughter></daughter>
+                        </div>
+        `,
+        components: {
+          son: {
+            template: '<span>我妹妹告诉我她叫{{mySisterName}}</span>',
+            data() {
+              return {
+                mySisterName: '????'
+              }
+            },
+            mounted () {
+              // 3. $on有两个参数，第一是发射过来的事件名称，
+              // 第二个是执行的函数，这个函数有个默认参数，这个参数就是发射过来的值
+              eventBus.$on('tellBroMyName', val => {
+                this.mySisterName = val
+              })
+            }
+          },
+          daughter: {
+            template: '<button @click="emitDaughterName">点击告诉哥哥我叫{{girlName}}</button>',
+            data () {
+              return {
+                girlName: '兰兰'
+              }
+            },
+            methods: {
+              emitDaughterName() {
+                // 2. 在这个函数中，使用事件总线发射一个事件名称，并携带上需要传递的值
+                eventBus.$emit('tellBroMyName', this.girlName)
+              }
+            }
+          }
+        }
+      })
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>

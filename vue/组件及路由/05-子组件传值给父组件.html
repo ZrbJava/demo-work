@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <father></father>
+    </div>
+    <script>
+      // 创建father组件
+      Vue.component('father', {
+        // 2. 在父组件中，去接收发射上来的函数和值。
+        // 要监听发射上来的事件，还是使用v-on指令
+        template: `<div>
+                          <p>父亲年纪大了，记性不好，我儿子告诉我他叫{{mySonName}}</p>
+                          <son @tellFatherMyName="getMySonName"></son>
+                        </div>`,
+        data () {
+          return {
+            mySonName: '????'
+          }
+        },
+        methods: {
+          // 要获取到发射上来的值，通过一个默认参数,获取传递过来的值
+          getMySonName (val) {
+            this.mySonName = val
+          }
+        },
+        components: {
+          // 创建son组件
+          son: {
+            template: '<button @click="emitSonName">点击就告诉爸爸我叫{{myName}}</button>',
+            data () {
+              return {
+                myName: 'Neil'
+              }
+            },
+            methods: {
+              emitSonName() {
+                // 1. 这里需要用到$emit()，它有两个参数，第一个参数是要发射的事件名称,这个名字是你自己随便取的；第二个参数是要发射出去的值
+                this.$emit('tellFatherMyName', this.myName)
+              }
+            }
+          }
+        }
+      })
+
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+
+        }
+      })
+    </script>
+  </body>
+</html>
