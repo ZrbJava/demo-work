@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue2.js"></script>
+    <style>
+        .edit {
+            display: block;
+            width: 80%;
+            height: 35px;
+            line-height: 35px;
+            margin: 30px auto;
+            box-sizing: border-box;
+            padding-left: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            outline: 0;
+            box-shadow: 0 0 5px #ccc;
+        }
+        .list{
+            margin: 0 auto;
+            width:80%;
+        }
+        .unit{
+            position:relative;
+            padding:10px 0;
+            border-bottom:1px solid #efefef;
+        }
+        .unit:last-child{
+            border-bottom:0;
+        }
+        .finish{
+            text-decoration: line-through;
+            color:#ccc;
+        }
+        .del{
+            background: red;
+            text-decoration: none;
+            position: absolute;
+            right: 0;
+            font-size: 12px;
+            border: 0;
+            outline: 0;
+            padding: 2px 5px;
+            border-radius: 5px;
+            color:#fff;
+        }
+        .empty{
+            font-size: 13px;
+            color:#ccc;
+            text-align: center;
+            padding:10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" placeholder="编写任务" v-model="task.content" class="edit" @keydown.enter="addTask">
+        <!-- 当数据数组为空时，渲染下面这个标签，提示暂无任务，提高用户体验 -->
+        <p v-if="list.length === 0" class="empty">暂无任务</p>                            
+        <div class="list">
+            <div class="unit" v-for="(item,index) in list" :key="index">
+                <input 
+                    @click="changeState(index)"
+                    :checked="item.finished"
+                    type="checkbox">
+                    <!-- 以对象方式动态绑定类 -->
+                <span :class="{'finish':item.finished}">{{item.content}}</span>
+                <button @click="removeTask(index)" class="del">删除</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            //默认任务
+            task: {
+                content: "", //内容为空
+                finished: false, //未完成
+                deleted: false, //未删除
+            },
+            // 任务列表
+            list: [],
+        },
+        methods: {
+            // 点击回车触发addTask函数，将task这个对象添加到list数组中，以便后面遍历数组渲染出来
+            addTask: function () {
+                this.list.push(this.task);
+                console.log(this.list);
+                // 存入list[]后，重置task，避免后面每添加一个任务的时候finished属性都继承之前修改后的值
+                this.task = {
+                    content: "", //内容为空
+                    finished: false, //未完成
+                    deleted: false, //未删除
+                }
+            },
+            //点击选框修改任务状态
+            changeState:function(index){
+                this.list[index].finished = !this.list[index].finished;
+            },
+            // 使用splice操作删除数组指定项
+            removeTask:function(index){
+                this.list.splice(index,1);
+            }
+        }
+    });
+</script>

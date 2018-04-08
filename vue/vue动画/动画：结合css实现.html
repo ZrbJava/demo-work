@@ -1,0 +1,60 @@
+
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+    <style>
+      /* 定义进入过渡的开始状态 */
+      .slide-enter, .slide-leave-to {
+        padding-left: 100px;
+      }
+      /* 定义进入过渡的结束状态 */
+      .slide-enter-to, .slide-leave {
+        padding-left: 0px;
+      }
+      /* 定义过渡的状态 */
+      .slide-enter-active, .slide-leave-active{
+        transition: all 10s;
+      }
+      /* .slide-leave {
+        padding-left: 0px;
+      }
+      .slide-leave-to {
+        padding-left: 100px;
+      }
+      .slide-leave-active {
+        transition: all 2s;
+      } */
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+      <h1>演示v-if</h1>
+      <!-- 
+        1. 找到需要添加动画的元素，给他用一个transition标签包裹起来 
+        2. 在transition标签中加一个name属性，name属性表示动画的名字
+      -->
+      <transition name="slide">
+        <p v-if="isVisible">xxxx</p>
+      </transition>
+
+      <button @click="toggle">点击切换</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          isVisible: false
+        },
+        methods: {
+          toggle() {
+            this.isVisible = !this.isVisible
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

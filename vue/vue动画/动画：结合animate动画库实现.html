@@ -1,0 +1,38 @@
+
+<html lang="en">
+    <head>
+      <title></title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="./vue2.js"></script>
+      <link rel="stylesheet" href="./animate.css">
+    </head>
+    <body>
+      <div id="app">
+  
+        <h1>演示v-if</h1>
+
+        <transition 
+          enter-active-class="animated fadeInLeft"
+          leave-active-class="animated fadeInRight"
+        >
+          <p v-if="isVisible">xxxx</p>
+        </transition>
+  
+        <button @click="toggle">点击切换</button>
+      </div>
+      <script>
+        var vm = new Vue({
+          el: '#app',
+          data: {
+            isVisible: false
+          },
+          methods: {
+            toggle() {
+              this.isVisible = !this.isVisible
+            }
+          }
+        })
+      </script>
+    </body>
+  </html>

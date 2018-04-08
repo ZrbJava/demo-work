@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+    <style>
+      #app div {
+        width: 200px;
+        height: 500px;
+        background-color: goldenrod;
+      }
+      #app .animate {
+        width: 50px;
+        transition: all 2s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+      <div :class="{animate: isHasClass}">我要有动画</div>
+      <button @click="isHasClass = !isHasClass">点击</button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          isHasClass: false
+        }
+      })
+    </script>
+  </body>
+</html>

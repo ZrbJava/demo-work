@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./vue2.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/index">首页</router-link>
+        <hr>
+        <router-view></router-view>
+    </div>
+    <script>
+        var index = Vue.component("index", {
+            template: "<div><router-link to='/index/shop/44'>首页->商品</router-link><router-view></router-view></div>"
+        });
+        var shop = Vue.component("shop", {
+            template: "<div><button @click='jump'>商品->detail</button><router-view></router-view></div>",
+            methods: {
+                jump(){
+                    this.$router.push({name:"detail"});
+                }
+            }
+        });
+        var detail = Vue.component("detail", {
+            template: "<div>detail</div>",
+            mounted () {
+                alert("需要查询的商品id是"+this.$route.params.id);
+                console.log(this.$route);//路由对象，里面包含fullPath路由全路径 name路由名字 query查询参数对象 params参数列表
+                console.log(this.$route.query);
+            }
+        });
+        var router = new VueRouter({
+            routes: [{
+                name: "index",
+                path: "/index",
+                component: index,
+                children: [{
+                    name: 'shop',
+                    path: 'shop/:id',
+                    component: shop,
+                    children: [{
+                        name: 'detail',
+                        path: 'detail',
+                        component: detail
+                    }]
+                }]
+            }]
+        });
+
+
+        var vm = new Vue({
+            el: '#app',
+            router,
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

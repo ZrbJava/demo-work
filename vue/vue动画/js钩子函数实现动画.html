@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./vue2.js"></script>
+  <link rel="stylesheet" href="./animate.css">
+</head>
+
+<body>
+  <div id="app">
+
+    <h1>演示v-if</h1>
+
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
+    >
+      <p v-if="isVisible">xxxx</p>
+    </transition>
+
+    <button @click="toggle">点击切换</button>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        isVisible: false
+      },
+      methods: {
+        toggle() {
+          this.isVisible = !this.isVisible
+        },
+        beforeEnter(el) {
+          console.log('动画进入之前执行');
+          el.style.paddingLeft = '100' + 'px'
+        },
+        // done回调函数必须写
+        enter(el, done) {
+          console.log('动画执行中执行');
+          var step = 0;
+          var interval = setInterval(() => {
+            step++
+            el.style.paddingLeft = (100 - step) + 'px'
+            if(step===100) {
+              clearInterval(interval)
+              // enter的动画结束完成之后，一定要调用done函数，不然后面函数不会执行
+              done();
+            }
+          }, 16)
+        },
+        afterEnter() {
+          console.log('动画进入完成后执行');
+        },
+        beforeLeave() {
+          console.log('动画离开前执行');
+        },
+        // done回调函数必须写
+        leave(el, done) {
+          console.log('动画离开时执行');
+          done()
+        },
+        afterLeave() {
+          console.log('动画离开后执行');
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

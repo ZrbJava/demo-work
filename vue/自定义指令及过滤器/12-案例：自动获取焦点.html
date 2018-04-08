@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./vue2.js"></script>
+  <style>
+    #app {
+      width: 600px;
+      margin: 10px auto;
+    }
+
+    .tb {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tb th {
+      background-color: #0094ff;
+      color: white;
+    }
+
+    .tb td,
+    .tb th {
+      padding: 5px;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    .add {
+      padding: 5px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="add">
+      编号:
+      <input type="text" v-model="newId" id="inputId"> 品牌名称:
+      <!-- ref表示一个dom的引用 -->
+      <input type="text" v-model="newName" ref="inputName">
+      <input type="button" value="添加" @click="addData">
+    </div>
+
+    <div class="add">
+      品牌名称:
+      <input type="text" placeholder="请输入搜索条件">
+    </div>
+
+    <div>
+      <table class="tb">
+        <tr>
+          <th>编号</th>
+          <th>品牌名称</th>
+          <th>创立时间</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="(item, index) in list" :key="index">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.ctime}}</td>
+          <td @click="delData(index)">删除</td>
+        </tr>
+        <tr v-if="list.length === 0">
+          <td colspan="4">没有品牌数据</td>
+        </tr>
+        <!-- 动态生成内容tr -->
+      </table>
+    </div>
+  </div>
+</body>
+
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      newId: '',
+      newName: '',
+      list: [
+        {id: 22, name: 'LV', ctime: new Date()},
+        {id: 2222, name: 'CC', ctime: new Date()},
+        {id: 232, name: 'Audio', ctime: new Date()}
+      ]
+    },
+    // 有一个钩子函数，mounted()，这个名字固定，它会在页面加载完成以后执行（目前这样理解），类似与window.onload
+    // 虽然它是一个函数，但是不能写在methods中
+    mounted () {
+      // console.log('执行了');
+      // document.getElementById('inputId').focus()
+
+      // 在vue里面，获取dom要通过this.$refs.ref名
+      console.log(this.$refs.inputName);
+      this.$refs.inputName.focus()
+    },
+    methods: {
+      // 定义删除数据的函数
+      delData(index) {
+        this.list.splice(index, 1)
+      },
+      addData() {
+        this.list.push({id: this.newId, name: this.newName, ctime: new Date()})
+      }
+    }
+  })
+</script>
+
+</html>
