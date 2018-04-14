@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Demo page</title>
+
+
+
+</head>
+
+<body>
+
+<div id="output"></div>
+
+<script src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
+
+
+<script>
+var randomColor = 'rgba('+parseInt(Math.random()*255)+','+parseInt(Math.random()*255)+','+parseInt(Math.random()*255)+')';
+console.log(randomColor);
+
+jQuery(function(){
+
+	jQuery('#output').qrcode({
+		render:"canvas",//渲染模式/可选项table/canvas
+		text:"zhaorubo.top",//二维码跳转链接
+		width: 100,//二维码的宽度
+    	height: 100,//二维码的高度
+		foreground: randomColor,//前景色
+    	background: "#FFF",//背景色
+
+	});
+
+})
+
+</script>
+
+
+
+</body>
+
+</html>
+

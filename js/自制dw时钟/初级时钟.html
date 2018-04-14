@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>定时器</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background: #e0d5e0;
+      
+    }
+    #box{
+      width:200px;
+      height:200px;
+      color:#fff;
+      border-radius:50%;
+      line-height:200px;
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      background: cornflowerblue;
+    }
+    #time{
+      text-align: center;
+      font-size:40px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <p id="time"></p>
+  </div>
+  <script>
+  
+//    封装一个时分秒的函数
+    function getDate(){
+      var date = new Date();
+      var date;
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+       hour = hour<10?"0"+hour:hour;
+       min = min<10?"0"+min:min;
+       sec = sec<10?"0"+sec:sec;
+      return hour+":"+min+":"+sec;
+    }
+var time =document.getElementById("time");
+ time.innerHTML = getDate()
+ setInterval(function(){
+   time.innerHTML = getDate()
+ },1000);
+  </script>
+</body>
+</html>

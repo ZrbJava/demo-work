@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 动画</title>
+	<style>
+		html, body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #0EA9B1;
+		}
+
+		section {
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.bg1, .bg2 {
+			position: absolute;
+			left: 0;
+			/*bottom: 0;*/
+			width: 100%;
+		}
+
+		.bg1 {
+			bottom: 20px;
+			height: 211px;
+			background-image: url(./1.png);
+			/*调用*/
+			animation: move 1s linear infinite;
+		}
+
+		.bg2 {
+			bottom: 0;
+			height: 235px;
+			background-image: url(./2.png);
+			animation: move 1s linear infinite;
+		}
+
+		.sun {
+			width: 50px;
+			height: 50px;
+			background-color: #FFF;
+			border-radius: 25px;
+			position: absolute;
+			left: 200px;
+			top: 100px;
+		}
+
+		.sun::before, .sun::after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #FFF;
+			border-radius: 25px;
+		}
+
+		.sun::before {
+			animation: scale 1s infinite linear;
+		}
+
+		.sun::after {
+			animation: scale 1s 0.5s infinite linear;
+		}
+
+		@keyframes scale {
+			0% {
+				/*transform: scale(1);
+				opacity: 1;*/
+			}
+
+			100% {
+				transform: scale(2);
+				opacity: 0;
+			}
+		}
+		
+		/*动画序列*/
+		@keyframes move {
+			0% {
+				/**/
+			}
+
+			50% {
+				bottom: -20px;
+			}
+
+			100% {
+				/**/
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<section>
+		<div class="sun"></div>
+		<div class="bg1"></div>
+		<div class="bg2"></div>
+	</section>
+</body>
+</html>

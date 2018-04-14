@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>升级版DW</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      background: #000;
+    }
+    .bigCircle{
+      margin:100px auto;
+      width:400px;
+      height: 400px;
+      background: #272729;
+      border-radius:50%;
+      border:10px solid #F1BD8E;
+      position: relative;
+    }
+ /*line公用样式*/
+    .line{
+      width: 2px;
+      height: 100%;
+      background: #F1BD8E;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    /*设置时针位置*/
+    .hour_box div:nth-child(1){
+      transform: rotate(30deg);
+    }
+    .hour_box div:nth-child(2){
+      transform: rotate(60deg);
+    }
+    .hour_box div:nth-child(3){
+      transform: rotate(90deg) translateY(2px);
+      width: 4px;
+    }
+    .hour_box div:nth-child(4){
+      transform: rotate(120deg);
+    }
+    .hour_box div:nth-child(5){
+      transform: rotate(150deg);
+    }
+    .hour_box div:nth-child(6){
+      transform: rotate(180deg)translateX(2px);
+      width: 4px;
+    }
+
+    /*遮盖中间部分的分针所用的圆部分*/
+    .min_mask{
+      width:350px;
+      height: 350px;
+      background: #28282a;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    /*遮盖中间部分的时针所用的圆部分*/
+    .hour_mask{
+      width:300px;
+      height: 300px;
+      background: #28282a;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+    }
+    
+    /*DW中间的旋转点*/
+    .centerCircle{
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #f1bd8e;
+      border: 1px solid #f1bd8e;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .logo{
+      width:100px;
+      height: 100px;
+      color:#fff;
+      position:absolute;
+      top:100px;
+      left:50%;
+      transform: translate(-50%,0);
+      text-align: center;
+    }
+    .logo .dw{
+      font:800 30px "Microsoft YaHei";
+    }
+    #D{
+      display:inline-block;
+      transform:rotate(180deg);
+    }
+    .logo .quancheng{
+      text-indent:-8px;
+    }
+    /*时针分针秒针部分*/
+    #hour{
+      width: 7px;
+      top: 100px;
+      height: 100px;
+      background: #f1bd8e;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transform-origin: bottom;
+    }
+    #min{
+      width: 4px;
+      top: 60px;
+      height: 140px;
+      background:#f1bd8e;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transform-origin: bottom;
+    }
+    #sec{
+      width: 2px;
+      top: 20px;
+      height: 180px;
+      background: #f1bd8e;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      left: 50%;
+      transform: translateX(-50%) ;
+      transform-origin: bottom;
+    }
+    #time{
+      color: #28282a;
+      position: absolute;
+      border-radius:5px;
+      left: 50%;
+      bottom: 100px;
+      transform: translateX(-50%);
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+<div class="bigCircle">
+  <div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+    <div class="line secLine"></div>
+  </div>
+  <div class="min_mask"></div>
+  <!--时针部分-->
+  <div class="hour_box">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+  <div class="hour_mask"></div>
+  <!--logo部分-->
+  <div class="logo">
+    <p class="dw"><span id="D">D</span><span>W</span></p>
+    <p class="quancheng">Daniel&nbsp;&nbsp;Wellington</p>
+  </div>
+  <!--中间时间部分-->
+  <div>
+    <div id="time"></div>
+    <div id="hour"></div>
+    <div id="min"></div>
+    <div id="sec"></div>
+  </div>
+  <div class="centerCircle"></div>
+
+</div>
+</body>
+</html>
+<script>
+//    封装一个时分秒的函数部分
+  function getDate(){
+    var date = new Date();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+    hour = hour<10?"0"+hour:hour;
+    min = min<10?"0"+min:min;
+    sec = sec<10?"0"+sec:sec;
+    return data = [hour,min,sec];
+  }
+//  获取对象部分
+  var time =document.getElementById("time");
+  var hour = document.getElementById("hour");
+  var min = document.getElementById("min");
+  var sec = document.getElementById("sec");
+  var secLine = document.getElementsByClassName('secLine');
+  
+//  设置分针位置部分
+var deg = 0;
+for(i=0;i<secLine.length;i++){
+  deg += 6;
+  secLine[i].style.transform="rotate("+deg+"deg)"
+  secLine[i].style.width="1px";
+}
+
+//  避免刷新是延时一秒部分
+  getDate()
+  time.innerHTML = data[0]+":"+data[1]+":"+data[2];
+  hour.style.transform = "rotate("+data[0]*30+"deg)";
+  min.style.transform = "rotate("+data[1]*6+"deg)";
+  sec.style.transform = "rotate("+data[2]*6+"deg)";
+//  解决刷新是延时一秒部分结束
+  setInterval(function(){
+    getDate();
+    time.innerHTML = data[0]+":"+data[1]+":"+data[2];
+    hour.style.transform = "rotate("+data[0]*30+"deg)"
+    min.style.transform = "rotate("+data[1]*6+"deg)"
+    sec.style.transform = "rotate("+data[2]*6+"deg)"
+  },1000);
+</script>

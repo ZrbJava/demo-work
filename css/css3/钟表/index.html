@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 钟表</title>
+	<style>
+
+		.clock {
+			width: 200px;
+			height: 200px;
+			margin: 100px auto;
+			border: 10px solid #000;
+
+			border-radius: 110px;
+			position: relative;
+		}
+	
+		.line {
+			width: 2px;
+			height: 100%;
+			background-color: #CCC;
+
+			position: absolute;
+			left: 50%;
+			margin-left: -1px;
+		}
+
+		.line1 {
+			transform: rotate(30deg);
+		}
+
+		.line2 {
+			transform: rotate(60deg);
+		}
+
+		.line3 {
+			transform: rotate(90deg);
+		}
+
+		.line4 {
+			transform: rotate(120deg);
+		}
+
+		.line5 {
+			transform: rotate(150deg);
+		}
+
+		.line6 {
+			transform: rotate(180deg);
+		}
+
+		.line3, .line6 {
+			width: 4px;
+			margin-left: -2px;
+		}
+
+		.cover {
+			width: 160px;
+			height: 160px;
+			margin: -80px 0 0 -80px;
+			background-color: #FFF;
+			border-radius: 80px;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		}
+
+		.hour {
+			width: 8px;
+			height: 50px;
+			margin-left: -4px;
+			margin-top: -50px;
+			background-color: #000;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+
+			animation: move 3600s steps(60) infinite;
+			transform-origin: center bottom;
+		}
+
+		.minutes {
+			width: 6px;
+			height: 60px;
+			margin-left: -3px;
+			margin-top: -60px;
+			background-color: #000;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+
+			animation: move 3600s steps(60) infinite;
+			transform-origin: center bottom;
+		}
+
+		.seconds {
+			width: 4px;
+			height: 70px;
+			margin-left: -2px;
+			margin-top: -70px;
+			background-color: red;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+
+			/*animation: move 60s linear infinite;*/
+
+			animation: move 60s steps(60) infinite;
+			transform-origin: center bottom;
+		}
+
+		.dotted {
+			width: 20px;
+			height: 20px;
+			margin: -10px 0 0 -10px;
+			background-color: #000;
+			border-radius: 10px;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		}
+		
+		/*动画序列*/
+		@keyframes move {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<div class="line line1"></div>
+		<div class="line line2"></div>
+		<div class="line line3"></div>
+		<div class="line line4"></div>
+		<div class="line line5"></div>
+		<div class="line line6"></div>
+		<div class="cover"></div>
+		<div class="hour"></div>
+		<div class="minutes"></div>
+		<div class="seconds"></div>
+		<div class="dotted"></div>
+	</div>
+</body>
+</html>
