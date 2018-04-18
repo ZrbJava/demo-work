@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container {
+            width: 400px;
+            min-height: 400px;
+            border: 1px solid #000;
+            margin-bottom: 100px;
+        }
+        #img {
+            width: 100%;
+        }
+        video {
+            width: 100%;
+        }
+
+        .put {
+            width: 80%;
+            height: 200px;
+            margin: 8%;
+            border: 1px dashed #666;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    读取文件：<input type="file" name="" id="text"/>
+    <div id="box"></div>
+</div>
+<div class="container">
+    读取图片：<input type="file" name="" id="url"/>
+    <img src="" alt="" id="img"/>
+</div>
+<div class="container">
+    读取视频：<input type="file" name="" id="video"/>
+    <video src=""></video>
+</div>
+<div class="container">
+    <div class="put"></div>
+    <div class="info"></div>
+</div>
+<script>
+
+    document.querySelector("#text").addEventListener("change",function(){
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function(){
+            document.querySelector("#box").innerHTML = reader.result;
+        }
+    });
+
+    document.querySelector("#url").addEventListener("change",function(){
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            document.querySelector("#img").src = reader.result;
+        }
+    });
+
+    document.querySelector("#video").addEventListener("change",function(){
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            document.querySelector("video").src = reader.result;
+        }
+    });
+
+    document.querySelector(".put").addEventListener("dragover",function(e){
+
+        e.preventDefault();
+    });
+    document.querySelector(".put").addEventListener("drop",function(e){
+        e.preventDefault();
+        var file=e.dataTransfer.files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function(){
+            document.querySelector(".info").innerHTML = reader.result;
+        }
+    })
+</script>
+</body>
+</html>

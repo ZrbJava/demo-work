@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3d旋转</title>
+  <style>
+  /*body{*/
+    /*!*perspective:600px;*!*/
+  /*}*/
+  .bigBox{
+    width: 200px;
+    height: 200px;
+    /*margin:0 auto;*/
+    /*margin-top:100px;*/
+    /*left:50%;*/
+    /*right:50%;*/
+    /*background: red;*/
+    position: absolute;
+    /*perspective: 600px;*/
+    transform-style:preserve-3d;
+    transform:rotate(0deg);
+  }
+  .box{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /*opacity:0.4;*/
+    /*transform-style:preserve-3d;*/
+    line-height:200px;
+    font-size:40px;
+    color:#fff;
+    text-align:center;
+    /*border-radius:50%;*/
+  
+  }
+    .one {
+      width: 100%;
+      height: 100%;
+      background: url("images/1.jpg")no-repeat center;
+      background-size:cover;
+  
+      position: absolute;
+      transform: translateY(50%) rotateX(-90deg);
+      
+    }
+    .two{
+      background: url("images/2.jpg")no-repeat center;
+      background-size:cover;
+  
+      transform:translateZ(-100px) rotateY(-180deg);
+    }
+  .three{
+    background: url("images/3.jpg")no-repeat center;
+    background-size:cover;
+  
+    transform: translateX(100px) rotateY(90deg);
+  }
+  .four{
+    background: url("images/4.jpg")no-repeat center;
+    background-size:cover;
+  
+    transform: translateX(-100px) rotateY(-90deg);
+  }
+  .five{
+    background: url("images/5.jpg")no-repeat center;
+    background-size:cover;
+  
+    transform: translateY(-100px) rotateX(90deg) ;
+  }
+  .six{
+    background: url("images/6.jpg")no-repeat center;
+    background-size:cover;
+    transform: translateZ(100px) ;
+  }
+  
+  </style>
+</head>
+<body>
+<div class="bigBox test" id="sdf" data-src="image/test.png" style="font-size:20px">
+  <div class="box one"></div>
+  <div class="box two"></div>
+  <div class="box three"></div>
+  <div class="box four"></div>
+  <div class="box five"></div>
+  <div class="box six"></div>
+
+
+</div>
+</body>
+</html>
+<script>
+  var bigBox = document.querySelector(".bigBox");
+//  window.getComputedStyle(bigBox,null).getPropertyValue("transform:rotate(20deg)")
+//  console.log(window.getComputedStyle(bigBox,null)["transform"]);
+  var deg = 0;
+  setInterval(function(){
+    bigBox.style.transform = "rotateX("+deg+"deg) rotateY("+deg+"deg)";
+    bigBox.style.top = deg+"px";
+    deg +=10;
+  },100)
+</script>

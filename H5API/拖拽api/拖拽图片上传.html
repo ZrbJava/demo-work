@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cont{
+            width: 500px;
+            height: 500px;
+            background: skyblue;
+            background-size:cover;
+            background-repeat: no-repeat;
+            line-height: 500px;
+            text-align:center;
+            position: absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont"> 拖拽文件进此处</div>
+
+
+<script>
+    var cont = document.querySelectorAll('.cont')[0];
+    cont.ondragover = function(e){
+       
+        e.preventDefault()
+    } 
+    cont.ondrop = function(e){
+        e.preventDefault();
+        // console.log(e.dataTransfer);
+        var files = e.dataTransfer.files[0];
+        // console.log(files);
+        var reader = new FileReader;
+        reader.readAsDataURL(files);
+        reader.onload = function(res){
+            // console.log(res);
+            // cont.innerHTML = reader.result;
+            console.log(reader.result);
+            // cont.style.backgroundImage = reader.result;
+            cont.style["background-image"] = "url("+reader.result+")"
+            
+
+        };
+
+
+        
+    }
+   
+</script></body></html>

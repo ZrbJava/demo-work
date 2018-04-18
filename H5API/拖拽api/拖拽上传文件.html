@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拖拽上传文件</title>
+  <style>
+    .box{
+      width: 300px;
+      height: 300px;
+      background: #ccc;
+      color:#fff;
+      line-height: 300px;
+      text-align:center;
+    }
+  </style>
+</head>
+<body>
+<div class="box">拖拽上传文件</div>
+<p id="cont"></p>
+<script>
+  var box = document.getElementsByClassName('box')[0];
+  var cont = document.getElementById("cont");
+  //移动到box对象时触发;
+  box.ondragover = function  (e){
+    e.preventDefault()
+  }
+  //在box对象上松开拖拽对象时触发
+  box.ondrop = function  (e){
+    //阻止默认样式
+    e.preventDefault();
+    //读取托进来的文件
+    var txt = e.dataTransfer.files[0];
+    var reader = new FileReader();
+    reader.readAsText(txt);
+    //当文件读取完成之后执行
+    reader.onload = function(){
+      cont.innerHTML = reader.result;
+    }
+    
+    console.log(e);
+    
+  }
+</script>
+</body>
+</html>

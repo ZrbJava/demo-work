@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>H5地理位置</title>
+</head>
+<body>
+<script>
+  var glt = navigator.geolocation;
+  glt.getCurrentPosition(function(res){
+//    console.log(res);
+    console.log("你所在的经纬度：("+res.coords.latitude+","+res.coords.longitude+")");
+  },function(err){
+    alert("错误："+err.message)
+  })
+  alert("slkdfjslkdjfslkdfjslkdjflksdjflsdjflsdjflskdjfl")
+</script>
+</body>
+</html>

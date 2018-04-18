@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拖拽案例</title>
+  <style>
+    .box{
+      width: 1000px;
+      height: 500px;
+      margin:0 auto;
+      font-size:0px;
+      /*background: #ccc;*/
+    }
+    .left{
+      width: 50%;
+      height: 100%;
+      float:left;
+      border: 1px solid green;
+  
+    }
+    .right{
+      width: 48%;
+      height: 100%;
+      float:right;
+      border: 1px solid red;
+    }
+    .left,.right{
+      overflow:hidden;
+  
+    }
+  
+    img{
+      width: 33.3%;
+      height: 33.3%;
+    }
+  </style>
+</head>
+<body>
+<div class="box" >
+  <div class="left" >
+    <img src="img/1.jpg" alt="">
+    <img src="img/2.jpg" alt="">
+    <img src="img/3.jpg" alt="">
+    <img src="img/4.jpg" alt="">
+    <img src="img/5.jpg" alt="">
+    <img src="img/6.jpg" alt="">
+    <img src="img/4.jpg" alt="">
+    <img src="img/5.jpg" alt="">
+    <img src="img/6.jpg" alt="">
+  </div>
+  <div class="right"></div>
+</div>
+</body>
+</html>
+<script>
+  var left = document.getElementsByClassName('left')[0];
+  var right = document.getElementsByClassName('right')[0];
+  var son = document.getElementsByClassName('son')[0];
+  var img = document.getElementById("img");
+  var target = null;
+//  拖动开始时获得当前拖动的对象保存起来
+  left.ondragstart = function (e){
+    target = e.target;
+  }
+  right.ondragstart = function (e){
+    target = e.target;
+  }
+  //拖动到右边盒子的时候执行
+  right.ondragover = function(e){
+    //阻止默认样式
+    e.preventDefault();
+  }
+  //在右边盒子放下的时候执行
+  right.ondrop = function(e){
+    e.preventDefault();
+//    将拖动的对象添加到right容器中
+    right.appendChild(target);
+  }
+//  =============返回来拖动================
+  left.ondragover = function(e){
+    //阻止默认样式
+    e.preventDefault();
+  }
+  left.ondrop = function(e){
+    e.preventDefault();
+
+//    left.appendChild(son);
+    left.appendChild(target);
+  }
+</script>
